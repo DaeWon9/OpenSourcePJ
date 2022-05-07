@@ -45,6 +45,25 @@ class Button:
 ########################### create object ########################################
 #backbround image
 main_background = pygame.image.load("image\Main_background.jpg") 
+nick_background = pygame.image.load("image\닉_background.jpg")
+move_map_background = pygame.image.load("image\Move_Main_background.jpg")
+
+
 #button
 start_button = Button(492, 310, "image\Start.png")
 explain_button = Button(492, 367, "image\Explain.png")
+
+backstage_button = Button(770, 1, "image\Backstage.png")
+continue_start_button = Button(100, 140, "image\이어하기.png")
+new_start_button = Button(100, 200, "image\새로하기.png")
+
+bag_button = Button(725, -1, "image\가방.png")
+save_info_button = Button(685, 1, "image\저장하기.png")
+
+npc = Button(500, 300, "image\Character.png")
+
+#image
+coin_1 = pygame.image.load("image\Coin1.png")
+coin_2 = pygame.image.load("image\Coin2.png")
+coin_3 = pygame.image.load("image\Coin3.png")
+coin_4 = pygame.image.load("image\Coin4.png")

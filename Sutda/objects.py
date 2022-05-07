@@ -44,8 +44,7 @@ class Button:
 
 ########################### create object ########################################
 #backbround image
-main_background = pygame.image.load("image\Main_background.png") 
+main_background = pygame.image.load("image\Main_background.jpg") 
 #button
-start_button = Button(80, 150, "image\Start.png")
-explain_button = Button(80, 230, "image\Explain.png")
-info_button = Button(80, 310, "image\Info.png")
+start_button = Button(492, 310, "image\Start.png")
+explain_button = Button(492, 367, "image\Explain.png")

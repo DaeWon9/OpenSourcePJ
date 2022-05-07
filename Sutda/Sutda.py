@@ -18,9 +18,9 @@ if (__name__ == "__main__"): # main 함수임
 
     while(entire_loop): # entire loop
         while(start_menu):
-            window.blit(main_background, (0,-60)) # main_background draw
-            #start_button.draw(window)
-            #explain_button.draw(window)
+            window.blit(main_background, (0,0)) # main_background draw
+            start_button.draw(window)
+            explain_button.draw(window)
             #info_button.draw(window)
             pygame.display.update() # display refresh
 
@@ -36,9 +36,5 @@ if (__name__ == "__main__"): # main 함수임
                         pass
                     if (explain_button.in_locate(pos)): # explain button click down
                         #explain_menu = True
-                        #start_menu = False
-                        pass
-                    if (info_button.in_locate(pos)): # info_button click down
-                        #info_menu = True
                         #start_menu = False
                         pass

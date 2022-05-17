@@ -60,7 +60,9 @@ new_start_button = Button(100, 200, "image\새로하기.png")
 bag_button = Button(725, -1, "image\가방.png")
 save_info_button = Button(685, 1, "image\저장하기.png")
 
-npc = Button(500, 300, "image\Character.png")
+Apeach = Button(250, 270, "image\\Apeach.png")
+Neo = Button(470, 320, "image\\Neo.png")
+SafeBox = Button(600, 300, "image\\SafeBox.png")
 
 #image
 coin_1 = pygame.image.load("image\Coin1.png")

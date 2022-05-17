@@ -76,7 +76,9 @@ if (__name__ == "__main__"): # main 함수임
             backstage_button.draw(window)
             bag_button.draw(window)
             save_info_button.draw(window)
-            npc.draw(window)
+            Neo.draw(window)
+            Apeach.draw(window)
+            SafeBox.draw(window)
             window.blit(character, (character_x_pos, character_y_pos))
 
             user_name_text = game_font.render("닉네임 : " + user_name, True, (0, 0 ,0))
@@ -113,9 +115,9 @@ if (__name__ == "__main__"): # main 함수임
                         move_y = 0
                 
                 if (event.type == pygame.MOUSEBUTTONDOWN):
-                    if (npc.in_locate(pos)): #npc 클릭
-                        #sutda_map = True
-                        #move_map = False
+                    if (Apeach.in_locate(pos)): #Apeach 클릭시 게임시작
+                        # sutda_map = True
+                        # move_map = False
                         pass
                     if (backstage_button.in_locate(pos)): #뒤로가기버튼 클릭
                         start_menu = True

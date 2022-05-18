@@ -47,7 +47,9 @@ class Button:
 main_background = pygame.image.load("image\Main_background.jpg") 
 nick_background = pygame.image.load("image\닉_background.jpg")
 move_map_background = pygame.image.load("image\Move_Main_background.jpg")
-
+sutda_map_background = pygame.image.load("image\Sutda_Map_Background.jpg")
+lose_map_background = pygame.image.load("image\You_lose.jpg")
+win_map_background = pygame.image.load("image\You_win.jpg")
 
 #button
 start_button = Button(492, 310, "image\Start.png")
@@ -64,8 +66,18 @@ Apeach = Button(250, 270, "image\\Apeach.png")
 Neo = Button(470, 320, "image\\Neo.png")
 SafeBox = Button(600, 300, "image\\SafeBox.png")
 
+
+die_button = Button(1, 400, "image\Die.png")
+call_button = Button(161, 400, "image\Call.png")
+quater_button = Button(321, 400, "image\Quater.png")
+half_button = Button(481, 400, "image\Half.png")
+족보_button = Button(641, 400, "image\족보.png")
+game_start_button = Button(481, 345, "image\Game_start.png")
+
 #image
 coin_1 = pygame.image.load("image\Coin1.png")
 coin_2 = pygame.image.load("image\Coin2.png")
 coin_3 = pygame.image.load("image\Coin3.png")
 coin_4 = pygame.image.load("image\Coin4.png")
+first_turn = pygame.image.load("image\선1.png")
+combination_table_image = pygame.image.load("image\Combination_table.png")

@@ -66,6 +66,10 @@ def display_refresh():
     window.blit(user_name_text,(85 - user_name_text_width / 2, 360)) #user name
     window.blit(com_name_text,(85 - com_name_text_width / 2, 195))  #com name
     window.blit(first_turn, (first_turn_pos[0], first_turn_pos[1]))
+    # character draw
+    window.blit(character,(46,268))
+    window.blit(apeach_image,(55,100))
+
     die_button.draw(window)
     call_button.draw(window)
     quater_button.draw(window)
@@ -110,6 +114,10 @@ def before_start_display_refresh():
     window.blit(user_money_text,(130, 363)) #user money
     window.blit(bet_money_text,(500, 237)) #betting money
     window.blit(call_money_text,(500, 285)) #call money
+    # character draw
+    window.blit(character,(46,268))
+    window.blit(apeach_image,(55,100))
+
     # button draw    
     die_button.draw(window)
     call_button.draw(window)
@@ -262,7 +270,7 @@ if (__name__ == "__main__"): # main 함수임
                 
                 if (event.type == pygame.MOUSEBUTTONDOWN):
                     if (Apeach.in_locate(pos)): #Apeach 클릭시 게임시작
-                        com_name = "대오니LV.1"
+                        com_name = "어피치LV.1"
                         user_money = 1000000
                         com_money = 1000000
                         pan_money = 10000

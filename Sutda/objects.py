@@ -51,6 +51,14 @@ sutda_map_background = pygame.image.load("image\Sutda_Map_Background.jpg")
 lose_map_background = pygame.image.load("image\You_lose.jpg")
 win_map_background = pygame.image.load("image\You_win.jpg")
 
+# computer character image
+apeach_image = pygame.image.load("image\\Apeach.png")
+muzi_image = pygame.image.load("image\\Muzi.png")
+tube_image = pygame.image.load("image\\Tube.png")
+neo_image = pygame.image.load("image\\Neo.png")
+jayg_image = pygame.image.load("image\\JayG.png")
+frodo_image = pygame.image.load("image\\Frodo.png")
+
 #button
 start_button = Button(492, 310, "image\Start.png")
 explain_button = Button(492, 367, "image\Explain.png")
@@ -65,7 +73,6 @@ save_info_button = Button(685, 1, "image\저장하기.png")
 Apeach = Button(250, 270, "image\\Apeach.png")
 Neo = Button(470, 320, "image\\Neo.png")
 SafeBox = Button(600, 300, "image\\SafeBox.png")
-
 
 die_button = Button(1, 400, "image\Die.png")
 call_button = Button(161, 400, "image\Call.png")

@@ -304,6 +304,8 @@ find_button = Button(560, 205, "image\\Find_button.png")
 
 Apeach = Button(250, 270, "image\\Apeach.png")
 Neo = Button(470, 320, "image\\Neo.png")
+gamestart_text = Button(247, 354, "image\\GameStart.png")
+itemshop_text = Button(481, 410, "image\\ItemShop.png")
 safe_box = Button(600, 300, "image\SafeBox.png")
 
 die_button = Button(79, 405, "image\Die.png")

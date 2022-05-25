@@ -265,6 +265,8 @@ if (__name__ == "__main__"): # main 함수임
             save_info_button.draw(window)
             Neo.draw(window)
             Apeach.draw(window)
+            gamestart_text.draw(window)
+            itemshop_text.draw(window)
             safe_box.draw(window)
             window.blit(character, (character_x_pos, character_y_pos))
 

@@ -916,7 +916,7 @@ if (__name__ == "__main__"): # main 함수임
             for event in pygame.event.get():
                 pos = pygame.mouse.get_pos()
                 if (event.type == pygame.QUIT): #quit event
-                    entire_loop = False
+                    entire_loop = False 
                     safe_box_map = False                
                 if (event.type == pygame.MOUSEBUTTONDOWN):
                     if (save_button.in_locate(pos)): # save_button click down

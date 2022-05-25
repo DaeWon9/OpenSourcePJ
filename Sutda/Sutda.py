@@ -167,14 +167,47 @@ def decide_user_self_betting(): # return 0 : die, return 1 : 콜, return 2 : 쿼
 
 
 if (__name__ == "__main__"): # main 함수임
+
+  ################ display check #######################
     entire_loop = True
     start_menu = True
-    mode_select_menu = False
+    nick_menu = False
     explain_menu = False
+    info_menu = False
     move_map = False
+    item_map = False
+    safe_box_map = False
+    level_select_map = False
+    level_select_map2 = False
     sutda_map = False
-    lose_map = False
+    safe_box_save_map = False
+    safe_box_find_map = False
     win_map = False
+    lose_map = False
+    shiftDown = False
+    mode_select_menu = False
+    bag_map = False
+    purchase_map = False
+    #################### item check #######################
+    item_list = []
+    green_fluoroscope_check = False
+    blue_fluoroscope_check = False
+    red_fluoroscope_check = False
+    green_canvas_check = False
+    blue_canvas_check = False
+    red_canvas_check = False
+
+    equip_green_fluoroscope = False
+    equip_blue_fluoroscope = False
+    equip_red_fluoroscope = False
+    equip_green_canvas = False
+    equip_blue_canvas = False
+    equip_red_canvas = False
+
+    equip_fluoroscope_check = False
+    equip_canvas_check = False
+    
+    fluoroscope_power_value = False
 
 
     while(entire_loop): # entire loop
@@ -279,6 +312,22 @@ if (__name__ == "__main__"): # main 함수임
                     if (backstage_button.in_locate(pos)): #뒤로가기버튼 클릭
                         start_menu = True
                         move_map = False
+                    if (bag_button.in_locate(pos)): #가방 클릭
+                        if(green_fluoroscope_check):
+                            item_list.append("green_fluoroscope")
+                        if(blue_fluoroscope_check):
+                            item_list.append("blue_fluoroscope")
+                        if(red_fluoroscope_check):
+                            item_list.append("red_fluoroscope")
+                        if(green_canvas_check):
+                            item_list.append("green_canvas")
+                        if(blue_canvas_check):
+                            item_list.append("blue_canvas")
+                        if(red_canvas_check):
+                            item_list.append("red_canvas")
+                        bag_map = True
+                        move_map = False
+
 
             character_x_pos = character_x_pos + (move_x * fps)
             character_y_pos = character_y_pos + (move_y * fps)
@@ -294,6 +343,175 @@ if (__name__ == "__main__"): # main 함수임
                 character_y_pos = 310
             elif character_y_pos > window_height - character_width:
                 character_y_pos = window_height - character_width
+
+        while(bag_map):
+            window.blit(bag_background, (0,0)) # bag_map draw
+            window.blit(bag_table,(66, 23))
+            window.blit(equip,(450, 320))
+            backstage_button.draw(window)
+            ################# 보유아이템 draw #############################
+            for i in range (0, len(item_list)):
+                if (item_list[i] == "green_fluoroscope"):
+                    green_fluoroscope.item_draw_in_bag(window,  1, i)
+                if (item_list[i] == "blue_fluoroscope"):
+                    blue_fluoroscope.item_draw_in_bag(window,  1, i)
+                if (item_list[i] == "red_fluoroscope"):
+                    red_fluoroscope.item_draw_in_bag(window,  1, i)
+                if (item_list[i] == "green_canvas"):
+                    green_canvas.item_draw_in_bag(window,  2, i)
+                if (item_list[i] == "blue_canvas"):
+                    blue_canvas.item_draw_in_bag(window,  2, i)
+                if (item_list[i] == "red_canvas"):
+                    red_canvas.item_draw_in_bag(window,  2, i)   
+            ################# 장착아이템 draw #############################
+            if (equip_green_canvas):
+                green_canvas.item_draw_in_equip(window,  2, 1)
+            if (equip_blue_canvas):
+                blue_canvas.item_draw_in_equip(window,  2, 1)
+            if (equip_red_canvas):
+                red_canvas.item_draw_in_equip(window,  2, 1)
+            if (equip_green_fluoroscope):
+                green_fluoroscope.item_draw_in_equip(window,  1, 0)
+            if (equip_blue_fluoroscope):
+                blue_fluoroscope.item_draw_in_equip(window,  1, 0)
+            if (equip_red_fluoroscope):
+                red_fluoroscope.item_draw_in_equip(window,  1, 0)
+            
+            bag_map_ch_pos = [455,260] 
+            character_x_pos_inb = bag_map_ch_pos[0]
+            character_y_pos_inb = bag_map_ch_pos[1]
+            window.blit(character, (character_x_pos_inb, character_y_pos_inb))
+            ############### item draw #####################
+            if (equip_green_fluoroscope):
+                green_fluoroscope.item_draw(window,  character_x_pos_inb + 9, character_y_pos_inb + 20)
+            if (equip_blue_fluoroscope):
+                blue_fluoroscope.item_draw(window,  character_x_pos_inb + 9, character_y_pos_inb + 20)
+            if (equip_red_fluoroscope):
+                red_fluoroscope.item_draw(window,  character_x_pos_inb + 9, character_y_pos_inb + 20)
+            if (equip_green_canvas):
+                green_canvas.item_draw(window,  character_x_pos_inb + 37, character_y_pos_inb + 81)
+            if (equip_blue_canvas):
+                blue_canvas.item_draw(window,  character_x_pos_inb + 37, character_y_pos_inb + 81)
+            if (equip_red_canvas):
+                red_canvas.item_draw(window,  character_x_pos_inb + 37, character_y_pos_inb + 81)
+            
+            
+            pygame.display.update() # display refresh
+
+            for event in pygame.event.get():
+                info_check = True
+                click_check = True
+                pos = pygame.mouse.get_pos()
+                if (event.type == pygame.QUIT): #quit event
+                    entire_loop = False
+                    bag_map = False    
+                if (green_canvas_check):
+                    if (green_canvas.item_in_locate(pos)):
+                        window.blit(green_canvas_info, (pos))
+                        pygame.display.update() # display refresh
+                        if (green_canvas.equip(window)):
+                            equip_green_canvas = True  
+                            equip_blue_canvas = False 
+                            equip_red_canvas = False
+                            equip_canvas_check = True
+                if (blue_canvas_check):
+                    if (blue_canvas.item_in_locate(pos)):
+                        window.blit(blue_canvas_info, (pos))
+                        pygame.display.update() # display refresh
+                        if (blue_canvas.equip(window)):
+                            equip_green_canvas = False  
+                            equip_blue_canvas = True 
+                            equip_red_canvas = False
+                            equip_canvas_check = True
+                if (red_canvas_check):
+                    if (red_canvas.item_in_locate(pos)):
+                        window.blit(red_canvas_info, (pos))
+                        pygame.display.update() # display refresh
+                        if (red_canvas.equip(window)):
+                            equip_green_canvas = False  
+                            equip_blue_canvas = False 
+                            equip_red_canvas = True   
+                            equip_canvas_check = True                              
+                if (green_fluoroscope_check):
+                    if (green_fluoroscope.item_in_locate(pos)):
+                        window.blit(green_fluoroscope_info, (pos))
+                        pygame.display.update() # display refresh
+                        if (green_fluoroscope.equip(window)):
+                            equip_green_fluoroscope = True  
+                            equip_blue_fluoroscope = False 
+                            equip_red_fluoroscope = False
+                            equip_fluoroscope_check = True   
+                if (blue_fluoroscope_check):
+                    if (blue_fluoroscope.item_in_locate(pos)):
+                        window.blit(blue_fluoroscope_info, (pos))
+                        pygame.display.update() # display refresh
+                        if (blue_fluoroscope.equip(window)):
+                            equip_green_fluoroscope = False  
+                            equip_blue_fluoroscope = True 
+                            equip_red_fluoroscope = False
+                            equip_fluoroscope_check = True   
+                if (red_fluoroscope_check):
+                    if(red_fluoroscope.item_in_locate(pos)):
+                        window.blit(red_fluoroscope_info, (pos))
+                        pygame.display.update() # display refresh
+                        if (red_fluoroscope.equip(window)):
+                            equip_green_fluoroscope = False  
+                            equip_blue_fluoroscope = False 
+                            equip_red_fluoroscope = True
+                            equip_fluoroscope_check = True   
+                if (event.type == pygame.MOUSEBUTTONDOWN): # backstage_button click down
+                    if (backstage_button.in_locate(pos)):
+                        item_list = []
+                        move_map = True
+                        bag_map = False  
+                    if pos[0] > 470 and pos[0] < 567: #equip 1
+                        if pos[1] > 371 and pos[1] < 431:
+                            if (equip_green_fluoroscope):
+                                green_fluoroscope.check_button_draw(window, "장착해제 하시겠습니까?")
+                            elif (equip_blue_fluoroscope):
+                                blue_fluoroscope.check_button_draw(window, "장착해제 하시겠습니까?")
+                            elif (equip_red_fluoroscope):
+                                red_fluoroscope.check_button_draw(window, "장착해제 하시겠습니까?")
+                            else:
+                                break
+                            pygame.display.update() # display refresh
+                            click_check = True
+                            while(click_check):
+                                for event in pygame.event.get():
+                                    pos = pygame.mouse.get_pos()
+                                    if (event.type == pygame.MOUSEBUTTONDOWN):
+                                        if (green_fluoroscope.yes_button_in_locate(pos)):   
+                                            equip_green_fluoroscope = False  
+                                            equip_blue_fluoroscope = False 
+                                            equip_red_fluoroscope = False  
+                                            equip_fluoroscope_check = False                                          
+                                            click_check = False
+                                        if (green_fluoroscope.no_button_in_locate(pos)):
+                                            click_check = False
+                    if pos[0] > 571 and pos[0] < 668: #equip 2
+                        if pos[1] > 371 and pos[1] < 431:
+                            if (equip_green_canvas):
+                                green_canvas.check_button_draw(window, "장착해제 하시겠습니까?")
+                            elif (equip_blue_canvas):
+                                blue_canvas.check_button_draw(window, "장착해제 하시겠습니까?")
+                            elif (equip_red_canvas):
+                                red_canvas.check_button_draw(window, "장착해제 하시겠습니까?")
+                            else:
+                                break
+                            pygame.display.update() # display refresh
+                            click_check = True
+                            while(click_check):
+                                for event in pygame.event.get():
+                                    pos = pygame.mouse.get_pos()
+                                    if (event.type == pygame.MOUSEBUTTONDOWN):
+                                        if (green_canvas.yes_button_in_locate(pos)):   
+                                            equip_green_canvas = False  
+                                            equip_blue_canvas = False 
+                                            equip_red_canvas = False   
+                                            equip_canvas_check = False                                          
+                                            click_check = False
+                                        if (green_fluoroscope.no_button_in_locate(pos)):
+                                            click_check = False
 
         while(lose_map):
             window.blit(lose_map_background, (0,0)) # lose_map_background draw

@@ -117,6 +117,6 @@ class Combination_Card(Card):
                 return [999999999, "error"]
 
     def show_card_class(self, window, pos_x, pos_y):
-        game_font = pygame.font.Font("D2Coding-Ver1.3.2-20180524-all.ttc", 16) # create font
+        game_font = pygame.font.Font("D2Coding-Ver1.3.2-20180524-all.ttc", 13) # create font
         self.card_text = game_font.render(self.get_card_class()[1], True, (255,255,255))
         window.blit(self.card_text,(pos_x, pos_y))

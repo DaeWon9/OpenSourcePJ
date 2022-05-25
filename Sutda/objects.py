@@ -74,12 +74,12 @@ Apeach = Button(250, 270, "image\\Apeach.png")
 Neo = Button(470, 320, "image\\Neo.png")
 SafeBox = Button(600, 300, "image\\SafeBox.png")
 
-die_button = Button(1, 400, "image\Die.png")
-call_button = Button(161, 400, "image\Call.png")
-quater_button = Button(321, 400, "image\Quater.png")
-half_button = Button(481, 400, "image\Half.png")
-족보_button = Button(641, 400, "image\족보.png")
-game_start_button = Button(481, 345, "image\Game_start.png")
+die_button = Button(79, 405, "image\Die.png")
+call_button = Button(79 + 129, 405, "image\Call.png")
+quater_button = Button(79 + 129*2, 405, "image\Quater.png")
+half_button = Button(79 + 129*3, 405, "image\Half.png")
+족보_button = Button(633, 421, "image\족보.png")
+game_start_button = Button(613, 324, "image\Game_start.png")
 
 #image
 coin_1 = pygame.image.load("image\Coin1.png")

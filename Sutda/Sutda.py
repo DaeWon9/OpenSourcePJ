@@ -10,7 +10,7 @@ user_name_text = game_font.render(com_name, True, (255,255,255))
 com_money_text = game_font.render(user_name, True, (255, 255 ,255))
 com_name_text = game_font.render(convert_money(com_money), True, (255, 255, 255))
 user_money_text = game_font.render(convert_money(user_money), True, (255, 255, 255))
-bet_money_text = game_font.render(convert_money(bet_money), True, (255, 255, 255))
+bet_money_text = game_font.render(convert_money(bet_money), True, (241, 255, 126))
 call_money_text = game_font.render(convert_money(call_money), True, (255, 255, 255))
 coin_money_text = game_font.render("+" + convert_money(coin_money), True, (0, 0, 255))
 
@@ -60,15 +60,15 @@ def display_refresh():
     com_name_text_width = game_font.size(com_name)[0]
     com_money_text = game_font.render(convert_money(com_money), True, (255, 255, 255))
     user_money_text = game_font.render(convert_money(user_money), True, (255, 255, 255))
-    bet_money_text = game_font.render(convert_money(bet_money), True, (255, 255, 255))
+    bet_money_text = game_font.render(convert_money(bet_money), True, (241, 255, 126))
     call_money_text = game_font.render(convert_money(call_money), True, (255, 255, 255))
     window.blit(sutda_map_background, (0,0)) # background draw
-    window.blit(user_name_text,(85 - user_name_text_width / 2, 360)) #user name
-    window.blit(com_name_text,(85 - com_name_text_width / 2, 195))  #com name
+    window.blit(user_name_text,(110 - user_name_text_width / 2, 308)) #user name
+    window.blit(com_name_text,(110 - com_name_text_width / 2, 180))  #com name
     window.blit(first_turn, (first_turn_pos[0], first_turn_pos[1]))
     # character draw
-    window.blit(character,(46,268))
-    window.blit(apeach_image,(55,100))
+    #window.blit(character,(46,268))
+    #window.blit(apeach_image,(55,100))
 
     die_button.draw(window)
     call_button.draw(window)
@@ -77,21 +77,21 @@ def display_refresh():
     족보_button.draw(window)
     game_start_button.draw(window)
     backstage_button.draw(window)
-    user_card1.draw_image(window, 150, 265)
-    user_card2.draw_image(window, 205, 265)
-    com_card2.draw_image(window, 205,100)
+    user_card1.draw_image(window, 166, 232)
+    user_card2.draw_image(window, 222, 232)
+    com_card2.draw_image(window, 222,101)
     if (fluoroscope_power_value):
-        com_card1.draw_image(window, 150,100)
-        com_combination_card.show_card_class(window, 150,180)
+        com_card1.draw_image(window, 166,101)
+        com_combination_card.show_card_class(window, 166,180)
     else:
-        back_card.draw_image(window, 150,100)
-    user_combination_card.show_card_class(window, 150, 345)
-    window.blit(com_money_text,(130, 198))   # computer money
-    window.blit(user_money_text,(130, 363)) #user money
-    window.blit(bet_money_text,(500, 237)) #betting money
-    window.blit(call_money_text,(500, 285)) #call money
+        back_card.draw_image(window, 166,101)
+    user_combination_card.show_card_class(window, 166, 310)
+    window.blit(com_money_text,(72, 196))   # computer money
+    window.blit(user_money_text,(72, 325)) #user money
+    window.blit(bet_money_text,(550, 254)) #betting money
+    window.blit(call_money_text,(550, 293)) #call money
     if(combination_table == 1):
-        window.blit(combination_table_image, (645,50)) # combination_table show
+        window.blit(combination_table_image, (610,68)) # combination_table show
     pygame.display.update() # display refresh
 
 def before_start_display_refresh():
@@ -104,19 +104,19 @@ def before_start_display_refresh():
     com_name_text_width = game_font.size(com_name)[0]
     com_money_text = game_font.render(convert_money(com_money), True, (255, 255, 255))
     user_money_text = game_font.render(convert_money(user_money), True, (255, 255, 255))
-    bet_money_text = game_font.render(convert_money(bet_money), True, (255, 255, 255))
+    bet_money_text = game_font.render(convert_money(bet_money), True, (241, 255, 126))
     call_money_text = game_font.render(convert_money(call_money), True, (255, 255, 255))
     # user and computer name draw
-    window.blit(user_name_text,(85 - user_name_text_width / 2, 360)) #user name
-    window.blit(com_name_text,(85 - com_name_text_width / 2, 195))  #com name
+    window.blit(user_name_text,(110 - user_name_text_width / 2, 308)) #user name
+    window.blit(com_name_text,(110 - com_name_text_width / 2, 180))  #com name
     # money info draw
-    window.blit(com_money_text,(130, 198))   # computer money
-    window.blit(user_money_text,(130, 363)) #user money
-    window.blit(bet_money_text,(500, 237)) #betting money
-    window.blit(call_money_text,(500, 285)) #call money
+    window.blit(com_money_text,(72, 196))   # computer money
+    window.blit(user_money_text,(72, 325)) #user money
+    window.blit(bet_money_text,(550, 254)) #betting money
+    window.blit(call_money_text,(550, 293)) #call money
     # character draw
-    window.blit(character,(46,268))
-    window.blit(apeach_image,(55,100))
+    #window.blit(character,(46,268))
+    #window.blit(apeach_image,(55,100))
 
     # button draw    
     die_button.draw(window)
@@ -127,7 +127,7 @@ def before_start_display_refresh():
     game_start_button.draw(window)
     backstage_button.draw(window)
     if(combination_table == 1):
-        window.blit(combination_table_image, (645,50)) # combination_table show
+        window.blit(combination_table_image, (610,68)) # combination_table show
     pygame.display.update() # display refresh 
 
 def decide_user_self_betting(): # return 0 : die, return 1 : 콜, return 2 : 쿼터, return 3 : 하프
@@ -396,41 +396,41 @@ if (__name__ == "__main__"): # main 함수임
             com_card2.load_card_info()
             # distribute cards according to order
             if (turn == 0): #user turn
-                first_turn_pos = [280, 255]
+                first_turn_pos = [300, 226]
                 window.blit(first_turn, (first_turn_pos[0], first_turn_pos[1]))
-                user_card1.draw_image(window, 150, 265)
+                user_card1.draw_image(window, 166, 232)
                 pygame.display.update() # display refresh
                 pygame.time.delay(hand_out_delay)
-                back_card.draw_image(window, 150,100)
+                back_card.draw_image(window, 166,101)
                 pygame.display.update() # display refresh
                 pygame.time.delay(hand_out_delay)
-                user_card2.draw_image(window, 205, 265)
+                user_card2.draw_image(window, 222, 232)
                 pygame.display.update() # display refresh
                 pygame.time.delay(hand_out_delay)
-                com_card2.draw_image(window, 205,100)
+                com_card2.draw_image(window, 222,101)
                 pygame.display.update() # display refresh
                 pygame.time.delay(hand_out_delay)
             else: #computer turn   
-                first_turn_pos = [280, 90]
+                first_turn_pos = [300, 90]
                 window.blit(first_turn, (first_turn_pos[0], first_turn_pos[1]))
-                back_card.draw_image(window, 150,100)
+                back_card.draw_image(window, 166,101)
                 pygame.display.update() # display refresh
                 pygame.time.delay(hand_out_delay)
-                user_card1.draw_image(window, 150, 265)
+                user_card1.draw_image(window, 166, 232)
                 pygame.display.update() # display refresh
                 pygame.time.delay(hand_out_delay)
-                com_card2.draw_image(window, 205,100)
+                com_card2.draw_image(window, 222,101)
                 pygame.display.update() # display refresh
                 pygame.time.delay(hand_out_delay)
-                user_card2.draw_image(window, 205, 265)
+                user_card2.draw_image(window, 222, 232)
                 pygame.display.update() # display refresh
                 pygame.time.delay(hand_out_delay)
 
             #show card_class
             user_combination_card = Combination_Card(user_card1.get_card_value(), user_card2.get_card_value())
             com_combination_card = Combination_Card(com_card1.get_card_value(), com_card2.get_card_value())
-            #com_combination_card.show_card_class(window, 150,180)
-            user_combination_card.show_card_class(window, 150, 345)
+            #com_combination_card.show_card_class(window, 166,180)
+            user_combination_card.show_card_class(window, 166, 310)
             fluoroscope_power_value = False
             display_refresh()
             pygame.display.update() # display refresh
@@ -449,7 +449,7 @@ if (__name__ == "__main__"): # main 함수임
                         continue
                     user_bet_result_text = game_font.render(user_bet_text, True, (255, 255, 255))
                     display_refresh()
-                    window.blit(user_bet_result_text,(280, 315))
+                    window.blit(user_bet_result_text,(310, 270))
                     pygame.display.update() # display refresh    
                     
                     if (user_bet_text == "die"):
@@ -468,7 +468,7 @@ if (__name__ == "__main__"): # main 함수임
                         continue
                     com_bet_result_text = game_font.render(com_bet_text, True, (255, 255, 255))
                     display_refresh()
-                    window.blit(com_bet_result_text,(280, 150))
+                    window.blit(com_bet_result_text,(307, 150))
                     pygame.display.update() # display refresh    
                     if (com_bet_text == "die"):
                         com_die = 1
@@ -481,9 +481,9 @@ if (__name__ == "__main__"): # main 함수임
                     continue
                 
             if(compare_cnt == 1): # compare combination card class
-                com_card1.draw_image(window, 150,100) #show computer card image
-                com_card2.draw_image(window, 205,100)
-                com_combination_card.show_card_class(window, 150,180)
+                com_card1.draw_image(window, 166,101) #show computer card image
+                com_card2.draw_image(window, 222,101)
+                com_combination_card.show_card_class(window, 166,180)
                 pygame.display.update() # display refresh
                 pygame.time.delay(hand_out_delay)
 

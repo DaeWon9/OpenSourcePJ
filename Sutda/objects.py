@@ -249,6 +249,7 @@ bag_background = pygame.image.load("image\Bag_background.png")
 bag_table = pygame.image.load("image\가방틀.png")    
 equip = pygame.image.load("image\Equip.png")
 purchase_map_background = pygame.image.load("image\ItempShop_background.png")
+safe_box_background = pygame.image.load("image\Safe_box_background.jpg")
 
 
 
@@ -270,10 +271,12 @@ new_start_button = Button(100, 200, "image\새로하기.png")
 
 bag_button = Button(725, -1, "image\가방.png")
 save_info_button = Button(685, 1, "image\저장하기.png")
+save_button = Button(560, 150, "image\\Save_button.png")
+find_button = Button(560, 205, "image\\Find_button.png")
 
 Apeach = Button(250, 270, "image\\Apeach.png")
 Neo = Button(470, 320, "image\\Neo.png")
-SafeBox = Button(600, 300, "image\\SafeBox.png")
+safe_box = Button(600, 300, "image\SafeBox.png")
 
 die_button = Button(79, 405, "image\Die.png")
 call_button = Button(79 + 129, 405, "image\Call.png")

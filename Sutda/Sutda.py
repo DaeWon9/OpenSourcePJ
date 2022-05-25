@@ -265,7 +265,7 @@ if (__name__ == "__main__"): # main 함수임
             save_info_button.draw(window)
             Neo.draw(window)
             Apeach.draw(window)
-            SafeBox.draw(window)
+            safe_box.draw(window)
             window.blit(character, (character_x_pos, character_y_pos))
 
             user_name_text = game_font.render("닉네임 : " + user_name, True, (0, 0 ,0))
@@ -329,6 +329,7 @@ if (__name__ == "__main__"): # main 함수임
                     if (backstage_button.in_locate(pos)): #뒤로가기버튼 클릭
                         start_menu = True
                         move_map = False
+
                     if (bag_button.in_locate(pos)): #가방 클릭
                         if(green_fluoroscope_check):
                             item_list.append("green_fluoroscope")
@@ -343,6 +344,10 @@ if (__name__ == "__main__"): # main 함수임
                         if(red_canvas_check):
                             item_list.append("red_canvas")
                         bag_map = True
+                        move_map = False
+
+                    if (safe_box.in_locate(pos)): #금고 클릭
+                        safe_box_map = True
                         move_map = False
 
 
@@ -878,3 +883,75 @@ if (__name__ == "__main__"): # main 함수임
                         item_list = []
                         move_map = True
                         purchase_map = False
+
+        while(safe_box_map):
+            window.blit(safe_box_background, (0,0)) # safe_box_background draw
+            save_button.draw(window)
+            find_button.draw(window)
+            backstage_button.draw(window)
+            window.blit(character, (character_x_pos, character_y_pos))
+            ############### item draw #####################
+            if (equip_green_fluoroscope):
+                green_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
+            if (equip_blue_fluoroscope):
+                blue_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
+            if (equip_red_fluoroscope):
+                red_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
+            if (equip_green_canvas):
+                green_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
+            if (equip_blue_canvas):
+                blue_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
+            if (equip_red_canvas):
+                red_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
+            ###############################################
+            user_money_text = game_font.render("보유금액 : " + convert_money(user_money), True, (0, 0, 0))
+            save_money_text = game_font.render("맡긴금액 : " + convert_money(save_money), True, (0, 0, 0))
+            window.blit(user_money_text,(1, 1))   # user_money
+            window.blit(save_money_text,(1, 20))   # save_money
+            pygame.display.update() # display refresh
+
+            for event in pygame.event.get():
+                pos = pygame.mouse.get_pos()
+                if (event.type == pygame.QUIT): #quit event
+                    entire_loop = False
+                    safe_box_map = False                
+                if (event.type == pygame.MOUSEBUTTONDOWN):
+                    if (save_button.in_locate(pos)): # save_button click down
+                        safe_box_save_map = True
+                        safe_box_map = False
+                    if (find_button.in_locate(pos)): # find_button click down
+                        safe_box_find_map = True
+                        safe_box_map = False
+
+                    if (backstage_button.in_locate(pos)): # backstage_button click down
+                        safe_box_map = False
+                        move_map = True
+                if (event.type == pygame.KEYDOWN): #keydown event
+                    if (event.key == pygame.K_LEFT):
+                        move_x = move_x - character_speed
+                    elif (event.key == pygame.K_RIGHT):
+                        move_x = move_x + character_speed
+                    elif (event.key == pygame.K_DOWN):
+                        move_y = move_y + character_speed
+                    elif (event.key == pygame.K_UP):
+                        move_y = move_y - character_speed
+                
+                if (event.type == pygame.KEYUP): #keyup event
+                    if (event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT):
+                        move_x = 0
+                    elif (event.key == pygame.K_DOWN or event.key == pygame.K_UP):
+                        move_y = 0
+
+            character_x_pos = character_x_pos + (move_x * fps)
+            character_y_pos = character_y_pos + (move_y * fps)
+
+            if character_x_pos < 0: # character x좌표 조정 
+                character_x_pos = 0
+            elif character_x_pos > window_width - character_width:
+                character_x_pos = window_width - character_width
+
+
+            if character_y_pos < 310: # character y좌표 조정 
+                character_y_pos = 310
+            elif character_y_pos > window_height - character_width:
+                character_y_pos = window_height - character_width

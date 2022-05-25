@@ -269,6 +269,20 @@ if (__name__ == "__main__"): # main 함수임
             itemshop_text.draw(window)
             safe_box.draw(window)
             window.blit(character, (character_x_pos, character_y_pos))
+            ############### item draw #####################
+            if (equip_green_fluoroscope):
+                green_fluoroscope.item_draw(window,  character_x_pos + 1, character_y_pos + 8)
+            if (equip_blue_fluoroscope):
+                blue_fluoroscope.item_draw(window,  character_x_pos + 1, character_y_pos + 8)
+            if (equip_red_fluoroscope):
+                red_fluoroscope.item_draw(window,  character_x_pos + 1, character_y_pos + 8)
+            if (equip_green_canvas):
+                green_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
+            if (equip_blue_canvas):
+                blue_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
+            if (equip_red_canvas):
+                red_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
+            
 
             user_name_text = game_font.render("닉네임 : " + user_name, True, (0, 0 ,0))
             window.blit(user_name_text,(1, 1)) #user name
@@ -403,17 +417,17 @@ if (__name__ == "__main__"): # main 함수임
             window.blit(character, (character_x_pos_inb, character_y_pos_inb))
             ############### item draw #####################
             if (equip_green_fluoroscope):
-                green_fluoroscope.item_draw(window,  character_x_pos_inb + 9, character_y_pos_inb + 20)
+                green_fluoroscope.item_draw(window,  character_x_pos_inb + 1, character_y_pos_inb + 8)
             if (equip_blue_fluoroscope):
-                blue_fluoroscope.item_draw(window,  character_x_pos_inb + 9, character_y_pos_inb + 20)
+                blue_fluoroscope.item_draw(window,  character_x_pos_inb + 1, character_y_pos_inb + 8)
             if (equip_red_fluoroscope):
-                red_fluoroscope.item_draw(window,  character_x_pos_inb + 9, character_y_pos_inb + 20)
+                red_fluoroscope.item_draw(window,  character_x_pos_inb + 1, character_y_pos_inb + 8)
             if (equip_green_canvas):
-                green_canvas.item_draw(window,  character_x_pos_inb + 37, character_y_pos_inb + 81)
+                green_canvas.item_draw(window,  character_x_pos_inb + 29, character_y_pos_inb + 81)
             if (equip_blue_canvas):
-                blue_canvas.item_draw(window,  character_x_pos_inb + 37, character_y_pos_inb + 81)
+                blue_canvas.item_draw(window,  character_x_pos_inb + 29, character_y_pos_inb + 81)
             if (equip_red_canvas):
-                red_canvas.item_draw(window,  character_x_pos_inb + 37, character_y_pos_inb + 81)
+                red_canvas.item_draw(window,  character_x_pos_inb + 29, character_y_pos_inb + 81)
             
             
             pygame.display.update() # display refresh
@@ -753,8 +767,6 @@ if (__name__ == "__main__"): # main 함수임
                         level_select_map2 = False
                         level_select_map = True
 
-
-
         while(sutda_map):
             before_start_display_refresh()
             if (com_money <= 0 and not result == 2): # computer 파산
@@ -963,24 +975,24 @@ if (__name__ == "__main__"): # main 함수임
             pygame.time.delay(1000)
     
         while(purchase_map):
-            purchase_map_ch_pos = [417,48] 
+            purchase_map_ch_pos = [453,37] 
             character_x_pos_inp = purchase_map_ch_pos[0]
             character_y_pos_inp = purchase_map_ch_pos[1]
             window.blit(purchase_map_background, (0,0)) # purchase_map_background draw
             backstage_button.draw(window)
             ############### item draw #####################
             if (equip_green_fluoroscope):
-                green_fluoroscope.item_draw(window,  character_x_pos_inp + 9, character_y_pos_inp + 20)
+                green_fluoroscope.item_draw(window,  character_x_pos_inp + 1, character_y_pos_inp + 8)
             if (equip_blue_fluoroscope):
-                blue_fluoroscope.item_draw(window,  character_x_pos_inp + 9, character_y_pos_inp + 20)
+                blue_fluoroscope.item_draw(window,  character_x_pos_inp + 1, character_y_pos_inp + 8)
             if (equip_red_fluoroscope):
-                red_fluoroscope.item_draw(window,  character_x_pos_inp + 9, character_y_pos_inp + 20)
+                red_fluoroscope.item_draw(window,  character_x_pos_inp + 1, character_y_pos_inp + 8)
             if (equip_green_canvas):
-                green_canvas.item_draw(window,  character_x_pos_inp + 37, character_y_pos_inp + 81)
+                green_canvas.item_draw(window,  character_x_pos_inp + 29, character_y_pos_inp + 76)
             if (equip_blue_canvas):
-                blue_canvas.item_draw(window,  character_x_pos_inp + 37, character_y_pos_inp + 81)
+                blue_canvas.item_draw(window,  character_x_pos_inp + 29, character_y_pos_inp + 76)
             if (equip_red_canvas):
-                red_canvas.item_draw(window,  character_x_pos_inp + 37, character_y_pos_inp + 81)
+                red_canvas.item_draw(window,  character_x_pos_inp + 29, character_y_pos_inp + 76)
             ############### user info draw ################################
             user_name_text_p = pygame.font.Font("D2Coding-Ver1.3.2-20180524-all.ttc", 14).render("이 름: " +user_name, True, (0, 0 ,0))
             possession_money_text_p = pygame.font.Font("D2Coding-Ver1.3.2-20180524-all.ttc", 12).render("<보유금액>", True, (0, 0, 0))
@@ -1008,20 +1020,20 @@ if (__name__ == "__main__"): # main 함수임
             if(red_canvas_check):
                 window.blit(sold_out, (64,128 + 45 * 5)) 
             ########### possession item draw #######################
-            possession_item_pos = [143,188,233,278,323,368]
+            possession_item_pos = [128,128 + 45 * 1,128 + 45 * 2,128 + 45 * 3,128 + 45 * 4,128 + 45 * 5]
             for i in range (0, len(item_list)):
                 if (item_list[i] == "green_fluoroscope"):
-                    green_fluoroscope.draw_sell_image(window, 417, possession_item_pos[i], 1, 2)
+                    green_fluoroscope.draw_sell_image(window, 446, possession_item_pos[i], 1, 2)
                 if (item_list[i] == "blue_fluoroscope"):
-                    blue_fluoroscope.draw_sell_image(window, 417, possession_item_pos[i], 1, 2)
+                    blue_fluoroscope.draw_sell_image(window, 446, possession_item_pos[i], 1, 2)
                 if (item_list[i] == "red_fluoroscope"):
-                    red_fluoroscope.draw_sell_image(window, 417, possession_item_pos[i], 1, 2)
+                    red_fluoroscope.draw_sell_image(window, 446, possession_item_pos[i], 1, 2)
                 if (item_list[i] == "green_canvas"):
-                    green_canvas.draw_sell_image(window, 417, possession_item_pos[i], 2, 2)
+                    green_canvas.draw_sell_image(window, 446, possession_item_pos[i], 2, 2)
                 if (item_list[i] == "blue_canvas"):
-                    blue_canvas.draw_sell_image(window, 417, possession_item_pos[i], 2, 2)
+                    blue_canvas.draw_sell_image(window, 446, possession_item_pos[i], 2, 2)
                 if (item_list[i] == "red_canvas"):
-                    red_canvas.draw_sell_image(window, 417, possession_item_pos[i], 2, 2)
+                    red_canvas.draw_sell_image(window, 446, possession_item_pos[i], 2, 2)
             ########################################################
             pygame.display.update() # display refresh
 
@@ -1083,17 +1095,17 @@ if (__name__ == "__main__"): # main 함수임
             window.blit(character, (character_x_pos, character_y_pos))
             ############### item draw #####################
             if (equip_green_fluoroscope):
-                green_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
+                green_fluoroscope.item_draw(window,  character_x_pos + 1, character_y_pos + 8)
             if (equip_blue_fluoroscope):
-                blue_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
+                blue_fluoroscope.item_draw(window,  character_x_pos + 1, character_y_pos + 8)
             if (equip_red_fluoroscope):
-                red_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
+                red_fluoroscope.item_draw(window,  character_x_pos + 1, character_y_pos + 8)
             if (equip_green_canvas):
-                green_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
+                green_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
             if (equip_blue_canvas):
-                blue_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
+                blue_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
             if (equip_red_canvas):
-                red_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
+                red_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
             ###############################################
             user_money_text = game_font.render("보유금액 : " + convert_money(user_money), True, (0, 0, 0))
             save_money_text = game_font.render("맡긴금액 : " + convert_money(save_money), True, (0, 0, 0))

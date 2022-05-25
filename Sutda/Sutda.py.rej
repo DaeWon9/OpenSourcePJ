@@ -1,0 +1,9 @@
+diff a/Sutda/Sutda.py b/Sutda/Sutda.py	(rejected hunks)
+@@ -407,6 +407,7 @@
+             window.blit(character, (character_x_pos_inb, character_y_pos_inb))
+             ############### item draw #####################
+             if (equip_green_fluoroscope):
++                green_fluoroscope.item_draw(window,  character_x_pos_inb + 1, character_y_pos_inb + 8)
+             if (equip_blue_fluoroscope):
+                 blue_fluoroscope.item_draw(window,  character_x_pos_inb + 1, character_y_pos_inb + 8)
+             if (equip_red_fluoroscope):

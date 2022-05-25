@@ -19,7 +19,7 @@ user_bet_value = -1
 hand_out_delay = 300
 betting_delay = 300
 
-user_money = 0
+user_money = 10000000000000000000
 com_money = 0
 pan_money = 0
 bet_money = 0

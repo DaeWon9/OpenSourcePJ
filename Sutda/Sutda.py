@@ -885,6 +885,7 @@ if (__name__ == "__main__"): # main 함수임
                         purchase_map = False
 
         while(safe_box_map):
+
             window.blit(safe_box_background, (0,0)) # safe_box_background draw
             save_button.draw(window)
             find_button.draw(window)
@@ -941,6 +942,212 @@ if (__name__ == "__main__"): # main 함수임
                         move_x = 0
                     elif (event.key == pygame.K_DOWN or event.key == pygame.K_UP):
                         move_y = 0
+
+            character_x_pos = character_x_pos + (move_x * fps)
+            character_y_pos = character_y_pos + (move_y * fps)
+
+            if character_x_pos < 0: # character x좌표 조정 
+                character_x_pos = 0
+            elif character_x_pos > window_width - character_width:
+                character_x_pos = window_width - character_width
+
+
+            if character_y_pos < 310: # character y좌표 조정 
+                character_y_pos = 310
+            elif character_y_pos > window_height - character_width:
+                character_y_pos = window_height - character_width
+
+
+        while(safe_box_save_map):
+            window.blit(safe_box_background, (0,0)) # safe_box_background draw
+            window.blit(safe_box_save_text.image, safe_box_save_text.rect)
+            user_money_text = game_font.render("보유금액 : " + convert_money(user_money), True, (0, 0, 0))
+            save_money_text = game_font.render("맡긴금액 : " + convert_money(save_money), True, (0, 0, 0))
+            window.blit(user_money_text,(1, 1))   # user_money
+            window.blit(save_money_text,(1, 20))   # save_money
+            backstage_button.draw(window) 
+            window.blit(character, (character_x_pos, character_y_pos))
+            ############### item draw #####################
+            if (green_fluoroscope_check):
+                green_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
+            if (blue_fluoroscope_check):
+                blue_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
+            if (red_fluoroscope_check):
+                red_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
+
+            if (green_canvas_check):
+                green_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
+            if (blue_canvas_check):
+                blue_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
+            if (red_canvas_check):
+                red_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
+                character_speed = 0.3
+            ###############################################
+            pygame.display.update() # display refresh
+
+            for event in pygame.event.get():
+                pos = pygame.mouse.get_pos()
+                if (event.type == pygame.QUIT): #quit event
+                    entire_loop = False
+                    safe_box_save_map = False
+                if event.type == pygame.KEYUP:
+                    if (event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT):
+                        move_x = 0
+                    elif (event.key == pygame.K_DOWN or event.key == pygame.K_UP):
+                        move_y = 0
+                if event.type == pygame.KEYDOWN:
+                    safe_box_save_text.add_chr(pygame.key.name(event.key))
+                    if (event.key == pygame.K_LEFT):
+                        move_x = move_x - character_speed
+                    if (event.key == pygame.K_RIGHT):
+                        move_x = move_x + character_speed
+                    if (event.key == pygame.K_DOWN):
+                        move_y = move_y + character_speed
+                    if (event.key == pygame.K_UP):
+                        move_y = move_y - character_speed
+                    if event.key == pygame.K_BACKSPACE:
+                        safe_box_save_text.new_text = safe_box_save_text.new_text[:-1]
+                        safe_box_save_text.update()
+                    if event.key == pygame.K_RETURN:
+                        if (int(safe_box_save_text.new_text) <= user_money):
+                            save_button.check_button_draw(window, "보관하시겠습니까?")
+                            pygame.display.update() # display refresh
+                            click_check = True
+                            while(click_check):
+                                for event in pygame.event.get():
+                                    pos = pygame.mouse.get_pos()
+                                    if (event.type == pygame.MOUSEBUTTONDOWN):
+                                        if (save_button.yes_button_in_locate(pos)):   
+                                            save_money += int(safe_box_save_text.new_text)
+                                            user_money = user_money - int(safe_box_save_text.new_text)
+                                            safe_box_save_text = Money_Box("보관할 금액을 입력하세요")
+                                            safe_box_save_text.rect.center = (400, 40) 
+                                            safe_box_map = True
+                                            safe_box_save_map = False
+                                            click_check = False
+                                        if (save_button.no_button_in_locate(pos)):
+                                            click_check = False
+                        else:
+                            alert_lack_of_money.draw(window)
+                            pygame.display.update() # display refresh
+                            ok_check = True
+                            while(ok_check):
+                                for event in pygame.event.get():
+                                    ok_pos = pygame.mouse.get_pos()
+                                    if (event.type == pygame.MOUSEBUTTONDOWN):
+                                        if (pos_check(ok_pos, 350, 259, 450, 299)):
+                                            ok_check = False
+                        
+                if (event.type == pygame.MOUSEBUTTONDOWN): # backstage_button click down
+                    if (backstage_button.in_locate(pos)):
+                        safe_box_save_text = Money_Box("보관할 금액을 입력하세요")
+                        safe_box_save_text.rect.center = (400, 40) 
+                        safe_box_map = True
+                        safe_box_save_map = False
+
+            
+
+            character_x_pos = character_x_pos + (move_x * fps)
+            character_y_pos = character_y_pos + (move_y * fps)
+
+            if character_x_pos < 0: # character x좌표 조정 
+                character_x_pos = 0
+            elif character_x_pos > window_width - character_width:
+                character_x_pos = window_width - character_width
+
+
+            if character_y_pos < 310: # character y좌표 조정 
+                character_y_pos = 310
+            elif character_y_pos > window_height - character_width:
+                character_y_pos = window_height - character_width
+
+        while(safe_box_find_map):
+            window.blit(safe_box_background, (0,0)) # safe_box_background draw
+            window.blit(safe_box_find_text.image, safe_box_find_text.rect)
+            user_money_text = game_font.render("보유금액 : " + convert_money(user_money), True, (0, 0, 0))
+            save_money_text = game_font.render("맡긴금액 : " + convert_money(save_money), True, (0, 0, 0))
+            window.blit(user_money_text,(1, 1))   # user_money
+            window.blit(save_money_text,(1, 20))   # save_money
+            backstage_button.draw(window) 
+            window.blit(character, (character_x_pos, character_y_pos))
+            ############### item draw #####################
+            if (green_fluoroscope_check):
+                green_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
+            if (blue_fluoroscope_check):
+                blue_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
+            if (red_fluoroscope_check):
+                red_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
+
+            if (green_canvas_check):
+                green_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
+            if (blue_canvas_check):
+                blue_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
+            if (red_canvas_check):
+                red_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
+                character_speed = 0.3
+
+
+            ###############################################
+            pygame.display.update() # display refresh
+            for event in pygame.event.get():
+                pos = pygame.mouse.get_pos()
+                if (event.type == pygame.QUIT): #quit event
+                    entire_loop = False
+                    safe_box_find_map = False
+                if (event.type == pygame.KEYUP): #keyup event
+                    if (event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT):
+                        move_x = 0
+                    elif (event.key == pygame.K_DOWN or event.key == pygame.K_UP):
+                        move_y = 0
+                if event.type == pygame.KEYDOWN:
+                    safe_box_find_text.add_chr(pygame.key.name(event.key))
+                    if (event.key == pygame.K_LEFT):
+                        move_x = move_x - character_speed
+                    if (event.key == pygame.K_RIGHT):
+                        move_x = move_x + character_speed
+                    if (event.key == pygame.K_DOWN):
+                        move_y = move_y + character_speed
+                    if (event.key == pygame.K_UP):
+                        move_y = move_y - character_speed
+                    if event.key == pygame.K_BACKSPACE:
+                        safe_box_find_text.new_text = safe_box_find_text.new_text[:-1]
+                        safe_box_find_text.update()
+                    if event.key == pygame.K_RETURN:
+                        if (int(safe_box_find_text.new_text) <= save_money):
+                            find_button.check_button_draw(window, "찾으시겠습니까?")
+                            pygame.display.update() # display refresh
+                            click_check = True
+                            while(click_check):
+                                for event in pygame.event.get():
+                                    pos = pygame.mouse.get_pos()
+                                    if (event.type == pygame.MOUSEBUTTONDOWN):
+                                        if (find_button.yes_button_in_locate(pos)):  
+                                            find_money += int(safe_box_find_text.new_text)
+                                            save_money = save_money - int(safe_box_find_text.new_text)
+                                            user_money = user_money + int(safe_box_find_text.new_text)
+                                            safe_box_find_text = Money_Box("찾으실 금액을 입력하세요")
+                                            safe_box_find_text.rect.center = (400, 40) 
+                                            safe_box_map = True
+                                            safe_box_find_map = False
+                                            click_check = False
+                                        if (save_button.no_button_in_locate(pos)):
+                                            click_check = False
+                        else:
+                            alert_lack_of_find_money.draw(window)
+                            pygame.display.update() # display refresh
+                            ok_check = True
+                            while(ok_check):
+                                for event in pygame.event.get():
+                                    ok_pos = pygame.mouse.get_pos()
+                                    if (event.type == pygame.MOUSEBUTTONDOWN):
+                                        if (pos_check(ok_pos, 350, 259, 450, 299)):
+                                            ok_check = False
+                if (event.type == pygame.MOUSEBUTTONDOWN): # backstage_button click down
+                    if (backstage_button.in_locate(pos)):
+                        safe_box_find_text = Money_Box("찾으실 금액을 입력하세요")
+                        safe_box_find_text.rect.center = (400, 40)
+                        safe_box_map = True
+                        safe_box_find_map = False
 
             character_x_pos = character_x_pos + (move_x * fps)
             character_y_pos = character_y_pos + (move_y * fps)

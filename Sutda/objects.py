@@ -2,6 +2,34 @@ import pygame
 from my_funtions import *
 from variable import *
 
+class Money_Box:
+    number_chars = "1234567890"
+    numpad_chars = ["[1]","[2]","[3]","[4]","[5]","[6]","[7]","[8]","[9]","[0]"]
+    def __init__(self, text_contents):
+        pygame.sprite.Sprite.__init__(self)
+        self.text_contents = text_contents
+        self.new_text = ""
+        self.text = ""
+        self.font = pygame.font.Font("D2Coding-Ver1.3.2-20180524-all.ttc", 20)
+        self.image = self.font.render(self.text_contents, False, [255, 255, 255])
+        self.rect = self.image.get_rect()
+    def add_chr(self, char):
+        for i in range (0,10):
+            if char == self.numpad_chars[i]:
+                self.new_text += self.number_chars[i]
+        if char in self.number_chars:
+            self.new_text += char
+        self.update()
+    def update(self):
+        old_rect_pos = self.rect.center
+        if (len(self.new_text) < 1):
+            self.new_text = "0"
+        self.text = convert_money(int(self.new_text))
+        self.image = self.font.render(self.text, False, [255, 255, 255])
+        self.rect = self.image.get_rect()
+        self.rect.center = old_rect_pos
+
+
 class Alert_Msg:
     def __init__(self, msg_text, window_width = 800, window_height = 450):
         self.msg_text = msg_text
@@ -310,3 +338,10 @@ red_fluoroscope = Item("빨간투시경", 100000000000, "image\투시경_빨강.
 green_canvas = Item("초록신발", 500000, "image\신발_초록.png", "이동속도 + 10")
 blue_canvas = Item("파란신발", 5000000, "image\신발_파랑.png", "이동속도 + 20")
 red_canvas = Item("빨간신발", 500000000, "image\신발_빨강.png", "이동속도 + 30")
+
+# text
+fluoroscope_power_text = pygame.font.Font("D2Coding-Ver1.3.2-20180524-all.ttc", 30).render("투시능력 발동!!", True, (255, 255 ,255))
+safe_box_save_text = Money_Box("보관할 금액을 입력하세요")
+safe_box_find_text = Money_Box("찾으실 금액을 입력하세요")
+safe_box_save_text.rect.center = (400, 40) 
+safe_box_find_text.rect.center = (400, 40) 

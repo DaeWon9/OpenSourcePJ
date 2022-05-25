@@ -305,11 +305,7 @@ if (__name__ == "__main__"): # main 함수임
                 
                 if (event.type == pygame.MOUSEBUTTONDOWN):
                     if (Apeach.in_locate(pos)): #Apeach 클릭시 게임시작
-                        com_name = "어피치LV.1"
-                        user_money = 1000000
-                        com_money = 1000000
-                        pan_money = 10000
-                        sutda_map = True
+                        level_select_map = True
                         move_map = False
 
                     if (Neo.in_locate(pos)): #Neo 클릭시 상점입장
@@ -566,6 +562,198 @@ if (__name__ == "__main__"): # main 함수임
                     if (backstage_button.in_locate(pos)):
                         move_map = True
                         win_map = False    
+
+        while(level_select_map):
+            window.blit(level_select_background, (0,0)) # level_select_background draw           
+            level_1.draw(window)
+            level_2.draw(window)
+            level_3.draw(window)
+            level_4.draw(window)
+            level_5.draw(window)
+            level_6.draw(window)
+            backstage_button.draw(window)
+            next_button.draw(window)
+            user_money_text = game_font.render("보유금액 : " + convert_money(user_money), True, (0, 0, 255))
+            window.blit(user_money_text,(1, 1))   # user_money
+
+            if(user_money < 10000000):
+                window.blit(level_2_lock, (305, 170))
+                window.blit(level_3_lock, (305, 250))
+                window.blit(level_4_lock, (615, 90))
+                window.blit(level_5_lock, (615, 170))
+                window.blit(level_6_lock, (615, 250))
+            elif(user_money < 50000000):
+                window.blit(level_3_lock, (305, 250))
+                window.blit(level_4_lock, (615, 90))
+                window.blit(level_5_lock, (615, 170))
+                window.blit(level_6_lock, (615, 250))
+            elif(user_money < 100000000):
+                window.blit(level_4_lock, (615, 90))
+                window.blit(level_5_lock, (615, 170))
+                window.blit(level_6_lock, (615, 250))
+            elif(user_money < 1000000000):
+                window.blit(level_5_lock, (615, 170))
+                window.blit(level_6_lock, (615, 250))
+            elif(user_money < 10000000000):
+                window.blit(level_6_lock, (615, 250))
+            else:
+                pass
+            pygame.display.update() # display refresh
+
+            for event in pygame.event.get():
+                pos = pygame.mouse.get_pos()
+                if (event.type == pygame.QUIT): #quit event
+                    entire_loop = False
+                    level_select_map = False                
+                if (event.type == pygame.MOUSEBUTTONDOWN):
+                    if (level_1.in_locate(pos)): # level_1 click down
+                        com_name = "신난 어피치"
+                        com_money = 1000000
+                        pan_money = 10000
+                        sutda_map = True
+                        level_select_map = False
+
+                    if (level_2.in_locate(pos) and user_money >=10000000): # level_2 click down
+                        com_name = "소심한 네오"
+                        com_money = 10000000
+                        pan_money = 100000
+                        sutda_map = True
+                        level_select_map = False
+
+                    if (level_3.in_locate(pos) and user_money >= 50000000): # level_3 click down
+                        com_name = "멋쩍은 튜브"
+                        com_money = 50000000
+                        pan_money = 500000
+                        sutda_map = True
+                        level_select_map = False
+
+                    if (level_4.in_locate(pos) and user_money >= 100000000): # level_4 click down
+                        com_name = "부탁하는 무지"
+                        com_money = 100000000
+                        pan_money = 1000000
+                        sutda_map = True
+                        level_select_map = False
+
+                    if (level_5.in_locate(pos) and user_money >= 1000000000): # level_5 click down
+                        com_name = "멋쟁이 프로도"
+                        com_money = 1000000000
+                        pan_money = 10000000
+                        sutda_map = True
+                        level_select_map = False
+
+                    if (level_6.in_locate(pos) and user_money >= 10000000000): # level_6 click down
+                        com_name = "힙합맨 제이지"
+                        com_money = 10000000000
+                        pan_money = 100000000
+                        sutda_map = True
+                        level_select_map2 = False
+
+                    if (backstage_button.in_locate(pos)): # backstage_button click down
+                        level_select_map = False
+                        move_map = True
+                    if (next_button.in_locate(pos)):
+                        level_select_map = False
+                        level_select_map2 = True
+
+        while(level_select_map2):
+            window.blit(level_select_background, (0,0)) # level_select_background draw           
+            level_7.draw(window)
+            level_8.draw(window)
+            level_9.draw(window)
+            level_10.draw(window)
+            level_11.draw(window)
+            level_12.draw(window)
+            backstage_button.draw(window)
+            back_button.draw(window)
+            user_money_text = game_font.render("보유금액 : " + convert_money(user_money), True, (0, 0, 255))
+            window.blit(user_money_text,(1, 1))   # user_money
+            if(user_money < 100000000000):
+                window.blit(level_7_lock, (305, 90))
+                window.blit(level_8_lock, (305, 170))
+                window.blit(level_9_lock, (305, 250))
+                window.blit(level_10_lock, (615, 90))
+                window.blit(level_11_lock, (615, 170))
+                window.blit(level_12_lock, (615, 250))
+            elif(user_money < 500000000000):
+                window.blit(level_8_lock, (305, 170))
+                window.blit(level_9_lock, (305, 250))
+                window.blit(level_10_lock, (615, 90))
+                window.blit(level_11_lock, (615, 170))
+                window.blit(level_12_lock, (615, 250))
+            elif(user_money < 1000000000000):
+                window.blit(level_9_lock, (305, 250))
+                window.blit(level_10_lock, (615, 90))
+                window.blit(level_11_lock, (615, 170))
+                window.blit(level_12_lock, (615, 250))
+            elif(user_money < 100000000000000):
+                window.blit(level_10_lock, (615, 90))
+                window.blit(level_11_lock, (615, 170))
+                window.blit(level_12_lock, (615, 250))
+            elif(user_money < 1000000000000000):
+                window.blit(level_11_lock, (615, 170))
+                window.blit(level_12_lock, (615, 250))
+            elif(user_money < 5000000000000000):
+                window.blit(level_12_lock, (615, 250))
+            else:
+                pass
+            pygame.display.update() # display refresh
+            for event in pygame.event.get():
+                pos = pygame.mouse.get_pos()
+                if (event.type == pygame.QUIT): #quit event
+                    entire_loop = False
+                    level_select_map2 = False                
+                if (event.type == pygame.MOUSEBUTTONDOWN):
+
+                    if (level_7.in_locate(pos) and user_money >= 100000000000): # level_7 click down
+                        com_name = "으쓱으쓱 어피치"
+                        com_money = 100000000000
+                        pan_money = 500000000
+                        sutda_map = True
+                        level_select_map2 = False
+
+                    if (level_8.in_locate(pos) and user_money >= 500000000000): # level_8 click down
+                        com_name = "불나게 일하는 네오"
+                        com_money = 500000000000
+                        pan_money = 1000000000
+                        sutda_map = True
+                        level_select_map2 = False
+
+                    if (level_9.in_locate(pos) and user_money >= 1000000000000): # level_9 click down
+                        com_name = "불 뿜는 튜브"
+                        com_money = 1000000000000
+                        pan_money = 10000000000
+                        sutda_map = True
+                        level_select_map2 = False
+
+                    if (level_10.in_locate(pos) and user_money >= 100000000000000): # level_10 click down
+                        com_name = "파이팅하는 무지"
+                        com_money = 100000000000000
+                        pan_money = 1000000000000
+                        sutda_map = True
+                        level_select_map2 = False
+
+                    if (level_11.in_locate(pos) and user_money >= 100000000000000): # level_11 click down
+                        com_name = "피스메이커 프로도"
+                        com_money = 100000000000000
+                        pan_money = 5000000000000
+                        sutda_map = True
+                        level_select_map2 = False
+
+                    if (level_11.in_locate(pos) and user_money >= 100000000000000): # level_12 click down
+                        com_name = "건방진 제이지"
+                        com_money = 100000000000000
+                        pan_money = 10000000000000
+                        sutda_map = True
+                        level_select_map2 = False
+
+                    if (backstage_button.in_locate(pos)): # backstage_button click down
+                        level_select_map2 = False
+                        move_map = True
+                    if (back_button.in_locate(pos)):
+                        level_select_map2 = False
+                        level_select_map = True
+
+
 
         while(sutda_map):
             before_start_display_refresh()
@@ -958,7 +1146,6 @@ if (__name__ == "__main__"): # main 함수임
                 character_y_pos = 310
             elif character_y_pos > window_height - character_width:
                 character_y_pos = window_height - character_width
-
 
         while(safe_box_save_map):
             window.blit(safe_box_background, (0,0)) # safe_box_background draw

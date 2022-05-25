@@ -248,6 +248,7 @@ win_map_background = pygame.image.load("image\You_win.jpg")
 bag_background = pygame.image.load("image\Bag_background.png")
 bag_table = pygame.image.load("image\가방틀.png")    
 equip = pygame.image.load("image\Equip.png")
+purchase_map_background = pygame.image.load("image\ItempShop_background.png")
 
 
 
@@ -288,6 +289,7 @@ coin_3 = pygame.image.load("image\Coin3.png")
 coin_4 = pygame.image.load("image\Coin4.png")
 first_turn = pygame.image.load("image\선1.png")
 combination_table_image = pygame.image.load("image\Combination_table.png")
+sold_out = pygame.image.load("image\Sold_out.png")
 
 green_canvas_info = pygame.image.load("image\Green_canvas_info.png")
 blue_canvas_info = pygame.image.load("image\Blue_canvas_info.png")

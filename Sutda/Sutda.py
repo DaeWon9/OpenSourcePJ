@@ -309,6 +309,23 @@ if (__name__ == "__main__"): # main 함수임
                         pan_money = 10000
                         sutda_map = True
                         move_map = False
+
+                    if (Neo.in_locate(pos)): #Neo 클릭시 상점입장
+                        if(green_fluoroscope_check):
+                            item_list.append("green_fluoroscope")
+                        if(blue_fluoroscope_check):
+                            item_list.append("blue_fluoroscope")
+                        if(red_fluoroscope_check):
+                            item_list.append("red_fluoroscope")
+                        if(green_canvas_check):
+                            item_list.append("green_canvas")
+                        if(blue_canvas_check):
+                            item_list.append("blue_canvas")
+                        if(red_canvas_check):
+                            item_list.append("red_canvas")
+                        purchase_map = True
+                        move_map = False
+                  
                     if (backstage_button.in_locate(pos)): #뒤로가기버튼 클릭
                         start_menu = True
                         move_map = False
@@ -750,3 +767,114 @@ if (__name__ == "__main__"): # main 함수임
             pygame.display.update() # display refresh
             pygame.time.delay(1000)
     
+        while(purchase_map):
+            purchase_map_ch_pos = [417,48] 
+            character_x_pos_inp = purchase_map_ch_pos[0]
+            character_y_pos_inp = purchase_map_ch_pos[1]
+            window.blit(purchase_map_background, (0,0)) # purchase_map_background draw
+            backstage_button.draw(window)
+            ############### item draw #####################
+            if (equip_green_fluoroscope):
+                green_fluoroscope.item_draw(window,  character_x_pos_inp + 9, character_y_pos_inp + 20)
+            if (equip_blue_fluoroscope):
+                blue_fluoroscope.item_draw(window,  character_x_pos_inp + 9, character_y_pos_inp + 20)
+            if (equip_red_fluoroscope):
+                red_fluoroscope.item_draw(window,  character_x_pos_inp + 9, character_y_pos_inp + 20)
+            if (equip_green_canvas):
+                green_canvas.item_draw(window,  character_x_pos_inp + 37, character_y_pos_inp + 81)
+            if (equip_blue_canvas):
+                blue_canvas.item_draw(window,  character_x_pos_inp + 37, character_y_pos_inp + 81)
+            if (equip_red_canvas):
+                red_canvas.item_draw(window,  character_x_pos_inp + 37, character_y_pos_inp + 81)
+            ############### user info draw ################################
+            user_name_text_p = pygame.font.Font("D2Coding-Ver1.3.2-20180524-all.ttc", 14).render("이 름: " +user_name, True, (0, 0 ,0))
+            possession_money_text_p = pygame.font.Font("D2Coding-Ver1.3.2-20180524-all.ttc", 12).render("<보유금액>", True, (0, 0, 0))
+            user_money_text_p = pygame.font.Font("D2Coding-Ver1.3.2-20180524-all.ttc", 14).render(convert_money(user_money), True, (0, 0, 0))
+            window.blit(user_name_text_p,(590, 50)) #user name
+            window.blit(possession_money_text_p,(590, 90)) #user money
+            window.blit(user_money_text_p,(590, 105)) #user money
+            ########### sell item draw #######################
+            green_fluoroscope.draw_sell_image(window, 64, 128, 1, 1)
+            if(green_fluoroscope_check):
+                window.blit(sold_out, (64,128)) 
+            blue_fluoroscope.draw_sell_image(window, 64, 128 + 45 * 1, 1, 1)
+            if(blue_fluoroscope_check):
+                window.blit(sold_out, (64,128 + 45 * 1)) 
+            red_fluoroscope.draw_sell_image(window, 64,128 + 45 * 2, 1, 1)
+            if(red_fluoroscope_check):
+                window.blit(sold_out, (64,128 + 45 * 2)) 
+            green_canvas.draw_sell_image(window, 64, 128 + 45 * 3, 2, 1)
+            if(green_canvas_check):
+                window.blit(sold_out, (64,128 + 45 * 3)) 
+            blue_canvas.draw_sell_image(window, 64, 128 + 45 * 4, 2, 1)
+            if(blue_canvas_check):
+                window.blit(sold_out, (64,128 + 45 * 4)) 
+            red_canvas.draw_sell_image(window, 64, 128 + 45 * 5, 2, 1)
+            if(red_canvas_check):
+                window.blit(sold_out, (64,128 + 45 * 5)) 
+            ########### possession item draw #######################
+            possession_item_pos = [143,188,233,278,323,368]
+            for i in range (0, len(item_list)):
+                if (item_list[i] == "green_fluoroscope"):
+                    green_fluoroscope.draw_sell_image(window, 417, possession_item_pos[i], 1, 2)
+                if (item_list[i] == "blue_fluoroscope"):
+                    blue_fluoroscope.draw_sell_image(window, 417, possession_item_pos[i], 1, 2)
+                if (item_list[i] == "red_fluoroscope"):
+                    red_fluoroscope.draw_sell_image(window, 417, possession_item_pos[i], 1, 2)
+                if (item_list[i] == "green_canvas"):
+                    green_canvas.draw_sell_image(window, 417, possession_item_pos[i], 2, 2)
+                if (item_list[i] == "blue_canvas"):
+                    blue_canvas.draw_sell_image(window, 417, possession_item_pos[i], 2, 2)
+                if (item_list[i] == "red_canvas"):
+                    red_canvas.draw_sell_image(window, 417, possession_item_pos[i], 2, 2)
+            ########################################################
+            pygame.display.update() # display refresh
+
+            item_list = []
+            if(green_fluoroscope_check):
+                item_list.append("green_fluoroscope")
+            if(blue_fluoroscope_check):
+                item_list.append("blue_fluoroscope")
+            if(red_fluoroscope_check):
+                item_list.append("red_fluoroscope")
+            if(green_canvas_check):
+                item_list.append("green_canvas")
+            if(blue_canvas_check):
+                item_list.append("blue_canvas")
+            if(red_canvas_check):
+                item_list.append("red_canvas")
+
+            for event in pygame.event.get():
+                pos = pygame.mouse.get_pos()
+                if (event.type == pygame.QUIT): #quit event
+                    entire_loop = False
+                    purchase_map = False    
+                if (event.type == pygame.MOUSEBUTTONDOWN): # backstage_button click down
+                    if (green_fluoroscope_check == False and pos_check(pos, 75, 143, 375, 143 + 46)):
+                        green_fluoroscope_p_check = green_fluoroscope.purchase(window, user_money)
+                        green_fluoroscope_check = green_fluoroscope_p_check[0]
+                        user_money = green_fluoroscope_p_check[1]
+                    if (blue_fluoroscope_check == False and pos_check(pos, 75, 188, 375, 188 + 46)):
+                        blue_fluoroscope_p_check = blue_fluoroscope.purchase(window, user_money)
+                        blue_fluoroscope_check = blue_fluoroscope_p_check[0]
+                        user_money= blue_fluoroscope_p_check[1]
+                    if (red_fluoroscope_check == False and pos_check(pos, 75, 233, 375, 233 + 46)):
+                        red_fluoroscope_p_check = red_fluoroscope.purchase(window, user_money)
+                        red_fluoroscope_check = red_fluoroscope_p_check[0]
+                        user_money = red_fluoroscope_p_check[1]
+                    if (green_canvas_check == False and pos_check(pos, 75, 278, 375, 278 + 46)):
+                        green_canvas_p_check = green_canvas.purchase(window, user_money)
+                        green_canvas_check = green_canvas_p_check[0]
+                        user_money = green_canvas_p_check[1]
+                    if (blue_canvas_check == False and pos_check(pos, 75, 323, 375, 323 + 46)):
+                        blue_canvas_p_check = blue_canvas.purchase(window, user_money)
+                        blue_canvas_check = blue_canvas_p_check[0]
+                        user_money = blue_canvas_p_check[1]
+                    if (red_canvas_check == False and pos_check(pos, 75, 368, 375, 368 + 46)):
+                        red_canvas_p_check = red_canvas.purchase(window, user_money)
+                        red_canvas_check = red_canvas_p_check[0]
+                        user_money = red_canvas_p_check[1]
+                    if (backstage_button.in_locate(pos)):
+                        item_list = []
+                        move_map = True
+                        purchase_map = False

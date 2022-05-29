@@ -11,6 +11,7 @@ game_font = pygame.font.Font("D2Coding-Ver1.3.2-20180524-all.ttc", 16) # create 
 window_frame = 100
 character_speed = 0.05
 coin_speed = 0
+fluoroscope_power = 0
 user_name = "테스트유저"
 com_name = ""
 user_bet_result_text = ""

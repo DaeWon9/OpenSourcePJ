@@ -272,39 +272,21 @@ if (__name__ == "__main__"): # main 함수임
             ############### item draw #####################
             if (equip_green_fluoroscope):
                 green_fluoroscope.item_draw(window,  character_x_pos + 1, character_y_pos + 8)
-            if (equip_blue_fluoroscope):
-                blue_fluoroscope.item_draw(window,  character_x_pos + 1, character_y_pos + 8)
-            if (equip_red_fluoroscope):
-                red_fluoroscope.item_draw(window,  character_x_pos + 1, character_y_pos + 8)
-            if (equip_green_canvas):
-                green_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
-            if (equip_blue_canvas):
-                blue_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
-            if (equip_red_canvas):
-                red_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
-            ############### item option applty #####################
-            if (equip_fluoroscope_check == False):
-                fluoroscope_power = 0
-            if (equip_green_fluoroscope):
-                green_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
                 fluoroscope_power = 5
             if (equip_blue_fluoroscope):
-                blue_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
+                blue_fluoroscope.item_draw(window,  character_x_pos + 1, character_y_pos + 8)
                 fluoroscope_power = 15
             if (equip_red_fluoroscope):
-                red_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
-                fluoroscope_power = 30       
-
-            if (equip_canvas_check == False):
-                character_speed = 0.05
+                red_fluoroscope.item_draw(window,  character_x_pos + 1, character_y_pos + 8)
+                fluoroscope_power = 30    
             if (equip_green_canvas):
-                green_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
+                green_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
                 character_speed = 0.15
             if (equip_blue_canvas):
-                blue_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
+                blue_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
                 character_speed = 0.25
             if (equip_red_canvas):
-                red_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
+                red_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
                 character_speed = 0.35
             ##################### coin ##########################
             if (coin_y_pos >= window_height):

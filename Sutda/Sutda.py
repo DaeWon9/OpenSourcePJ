@@ -164,8 +164,6 @@ def decide_user_self_betting(): # return 0 : die, return 1 : 콜, return 2 : 쿼
                     display_refresh()
                     continue      
 
-
-
 if (__name__ == "__main__"): # main 함수임
 
   ################ display check #######################
@@ -953,6 +951,11 @@ if (__name__ == "__main__"): # main 함수임
             #com_combination_card.show_card_class(window, 166,180)
             user_combination_card.show_card_class(window, 166, 310)
             fluoroscope_power_value = False
+            if (decide_fluoroscope_power(fluoroscope_power)):
+                window.blit(fluoroscope_power_text,(50, 20)) 
+                pygame.display.update() # display refresh
+                pygame.time.delay(2000)
+                fluoroscope_power_value = True
             display_refresh()
             pygame.display.update() # display refresh
 

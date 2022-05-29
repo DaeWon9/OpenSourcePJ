@@ -282,7 +282,58 @@ if (__name__ == "__main__"): # main 함수임
                 blue_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
             if (equip_red_canvas):
                 red_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
-            
+            ############### item option applty #####################
+            if (equip_fluoroscope_check == False):
+                fluoroscope_power = 0
+            if (equip_green_fluoroscope):
+                green_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
+                fluoroscope_power = 5
+            if (equip_blue_fluoroscope):
+                blue_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
+                fluoroscope_power = 15
+            if (equip_red_fluoroscope):
+                red_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
+                fluoroscope_power = 30       
+
+            if (equip_canvas_check == False):
+                character_speed = 0.05
+            if (equip_green_canvas):
+                green_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
+                character_speed = 0.15
+            if (equip_blue_canvas):
+                blue_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
+                character_speed = 0.25
+            if (equip_red_canvas):
+                red_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
+                character_speed = 0.35
+            ##################### coin ##########################
+            if (coin_y_pos >= window_height):
+                rand_coin = random.randint(0,100)
+                coin_x_pos = random.randint(1,770)
+                coin_y_pos = 1
+                if (rand_coin < 50): #50% 확률로 coin_1  생성
+                    window.blit(coin_1, (coin_x_pos, coin_y_pos))
+                    coin_speed = 0.05
+                elif (rand_coin < 80): #30% 확률로 coin_2 생성
+                    window.blit(coin_2, (coin_x_pos, coin_y_pos))
+                    coin_speed = 0.07
+                elif (rand_coin < 95): #15% 확률로 coin_3 생성
+                    window.blit(coin_3, (coin_x_pos, coin_y_pos))
+                    coin_speed = 0.09
+                else: #5% 확률로 coin_4 생성
+                    window.blit(coin_4, (coin_x_pos, coin_y_pos))
+                    coin_speed = 0.15
+
+            if (coin_y_pos < window_height):
+                coin_y_pos = coin_y_pos + (coin_speed * fps)
+                if (rand_coin < 50):
+                    window.blit(coin_1, (coin_x_pos, coin_y_pos))
+                elif (rand_coin < 80):
+                    window.blit(coin_2, (coin_x_pos, coin_y_pos))
+                elif (rand_coin < 95):
+                    window.blit(coin_3, (coin_x_pos, coin_y_pos))
+                else:
+                    window.blit(coin_4, (coin_x_pos, coin_y_pos))
 
             user_name_text = game_font.render("닉네임 : " + user_name, True, (0, 0 ,0))
             window.blit(user_name_text,(1, 1)) #user name
@@ -293,6 +344,8 @@ if (__name__ == "__main__"): # main 함수임
             window.blit(user_money_text,(1, 20)) #user money
             user_speed_text = game_font.render("이동속도 : " + str(int(character_speed * 100)), True, (0, 0, 255))
             window.blit(user_speed_text,(1, 40)) #user speed
+            user_fluoroscope_power_text = game_font.render("투시확률 : " + str(fluoroscope_power) + "%", True, (0, 0, 255))
+            window.blit(user_fluoroscope_power_text,(1, 60)) #user fluoroscope_power
             pygame.display.update() # display refresh
 
             for event in pygame.event.get(): #event check
@@ -377,6 +430,50 @@ if (__name__ == "__main__"): # main 함수임
                 character_y_pos = 310
             elif character_y_pos > window_height - character_width:
                 character_y_pos = window_height - character_width
+
+            ##############3#coin & character info update
+            character_rect = character.get_rect()
+            character_rect.left = character_x_pos
+            character_rect.top = character_y_pos
+
+            if (rand_coin < 50):
+                coin_rect = coin_1.get_rect()
+                coin_rect.left = coin_x_pos
+                coin_rect.top = coin_y_pos
+            elif (rand_coin < 80):
+                coin_rect = coin_2.get_rect()
+                coin_rect.left = coin_x_pos
+                coin_rect.top = coin_y_pos
+            elif (rand_coin < 95):
+                coin_rect = coin_2.get_rect()
+                coin_rect.left = coin_x_pos
+                coin_rect.top = coin_y_pos
+            else:
+                coin_rect = coin_2.get_rect()
+                coin_rect.left = coin_x_pos
+                coin_rect.top = coin_y_pos
+
+            # collide check
+            if (character_rect.colliderect(coin_rect)):
+                if (rand_coin < 50):
+                    coin_money = int(user_money * 0.001)
+                    if(user_money <= 1000000):
+                        coin_money = 1000
+                elif (rand_coin < 80):
+                    coin_money = int(user_money * 0.005)
+                    if(user_money <= 1000000):
+                        coin_money = 5000
+                elif (rand_coin < 95):
+                    coin_money = int(user_money * 0.01)
+                    if(user_money <= 1000000):
+                        coin_money = 10000                
+                else:
+                    coin_money = int(user_money * 0.1)
+                    if(user_money <= 1000000):
+                        coin_money = 100000                   
+
+                user_money = user_money + coin_money
+                coin_y_pos = window_height
 
         while(bag_map):
             window.blit(bag_background, (0,0)) # bag_map draw

@@ -309,4 +309,3 @@ def decide_fluoroscope_power(power_value):
     if (rand_num < power_value):
         return True
 
-

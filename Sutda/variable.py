@@ -6,13 +6,15 @@ window_height = 450
 window = pygame.display.set_mode((window_width, window_height)) #set display size
 pygame.display.set_caption("섯다!") #title
 game_font = pygame.font.Font("D2Coding-Ver1.3.2-20180524-all.ttc", 16) # create font
+programIcon = pygame.image.load("image\icon.png")
+pygame.display.set_icon(programIcon)
 
 ############################################################################################
 window_frame = 100
 character_speed = 0.05
 coin_speed = 0
 fluoroscope_power = 0
-user_name = "테스트유저"
+user_name = ""
 com_name = ""
 user_bet_result_text = ""
 com_bet_result_text = ""
@@ -51,19 +53,8 @@ character_y_pos = window_height - character_height
 move_x = 0
 move_y = 0
 
+
 #time
 clock = pygame.time.Clock()
 start_ticks = pygame.time.get_ticks() # get start tick
 fps = clock.tick(window_frame) #frame set
-
-#input text
-eng_chars = "abcdefghijklmnopqrstuvwxyz"
-text_font = pygame.font.Font("D2Coding-Ver1.3.2-20180524-all.ttc", 32)
-input_first_text = text_font.render("닉네임을 입력하세요.", True, (255,255,255))
-input_text = ""
-input_box = pygame.Rect(230, 70, 340, 52)
-color_inactive = pygame.Color("lightskyblue3")
-color_active = pygame.Color("orangered4")
-color = color_inactive
-active = False
-done = False

@@ -6,6 +6,7 @@ from my_funtions import *
 
 # text
 game_font = pygame.font.Font("D2Coding-Ver1.3.2-20180524-all.ttc", 16) # create font
+info_font = pygame.font.Font("D2Coding-Ver1.3.2-20180524-all.ttc", 14) # create font
 user_name_text = game_font.render(com_name, True, (255,255,255))
 com_money_text = game_font.render(user_name, True, (255, 255 ,255))
 com_name_text = game_font.render(convert_money(com_money), True, (255, 255, 255))
@@ -13,7 +14,45 @@ user_money_text = game_font.render(convert_money(user_money), True, (255, 255, 2
 bet_money_text = game_font.render(convert_money(bet_money), True, (241, 255, 126))
 call_money_text = game_font.render(convert_money(call_money), True, (255, 255, 255))
 coin_money_text = game_font.render("+" + convert_money(coin_money), True, (0, 0, 255))
+com_character_image = pygame.image.load("image\LV1.png")
 
+
+def save_user_info():
+    f = open("data.txt", "w")
+    f.write("###################유저 정보###################\n")
+    f.write("user_name\n")
+    f.write(str(user_name) + "\n") #save user_name
+    f.write("user_money\n")
+    f.write(str(user_money) + "\n") #save user_money
+    f.write("saved_money\n")
+    f.write(str(save_money) + "\n") #save save_money
+    f.write("###################아이템 보유현황###################\n")
+    f.write("green_fluoroscope_check\n")
+    f.write(str(green_fluoroscope_check) + "\n")
+    f.write("blue_fluoroscope_check\n")
+    f.write(str(blue_fluoroscope_check) + "\n")
+    f.write("red_fluoroscope_check\n")
+    f.write(str(red_fluoroscope_check) + "\n")
+    f.write("green_canvas_check\n")
+    f.write(str(green_canvas_check) + "\n")
+    f.write("blue_canvas_check\n")
+    f.write(str(blue_canvas_check) + "\n")
+    f.write("red_canvas_check\n")
+    f.write(str(red_canvas_check) + "\n")
+    f.write("###################아이템 장착여부###################\n")
+    f.write("equip_green_fluoroscope\n")
+    f.write(str(equip_green_fluoroscope) + "\n")
+    f.write("equip_blue_fluoroscope\n")
+    f.write(str(equip_blue_fluoroscope) + "\n")
+    f.write("equip_red_fluoroscope\n")
+    f.write(str(equip_red_fluoroscope) + "\n")
+    f.write("equip_green_canvas\n")
+    f.write(str(equip_green_canvas) + "\n")
+    f.write("equip_blue_canvas\n")
+    f.write(str(equip_blue_canvas) + "\n")
+    f.write("equip_red_canvas\n")
+    f.write(str(equip_red_canvas) + "\n")
+    f.close()
 def computer_betting(value): # value 0 : die, value 1 : 콜, value 2 : 쿼터, value 3 : 하프
     global com_die, com_money, bet_money, call_money, com_bet_result_text
     if (value == 0): # computer die
@@ -52,14 +91,13 @@ def user_betting(value): # value 0 : die, value 1 : 콜, value 2 : 쿼터, value
         call_money = int(bet_money // 2)
         bet_money = bet_money + int(bet_money // 2)
         return "half"
-
 def display_refresh():
-    user_name_text = game_font.render(user_name, True, (255, 255 ,255))
-    user_name_text_width = game_font.size(user_name)[0]
-    com_name_text = game_font.render(com_name, True, (255,255,255))
-    com_name_text_width = game_font.size(com_name)[0]
-    com_money_text = game_font.render(convert_money(com_money), True, (255, 255, 255))
-    user_money_text = game_font.render(convert_money(user_money), True, (255, 255, 255))
+    user_name_text = info_font.render(user_name, True, (255, 255 ,255))
+    user_name_text_width = info_font.size(user_name)[0]
+    com_name_text = info_font.render(com_name, True, (255,255,255))
+    com_name_text_width = info_font.size(com_name)[0]
+    com_money_text = info_font.render(convert_money(com_money), True, (241, 255, 126))
+    user_money_text = info_font.render(convert_money(user_money), True, (241, 255, 126))
     bet_money_text = game_font.render(convert_money(bet_money), True, (241, 255, 126))
     call_money_text = game_font.render(convert_money(call_money), True, (255, 255, 255))
     window.blit(sutda_map_background, (0,0)) # background draw
@@ -67,9 +105,29 @@ def display_refresh():
     window.blit(com_name_text,(110 - com_name_text_width / 2, 180))  #com name
     window.blit(first_turn, (first_turn_pos[0], first_turn_pos[1]))
     # character draw
-    #window.blit(character,(46,268))
-    #window.blit(apeach_image,(55,100))
+    window.blit(com_character_image,(78,112))
+    # item draw
+    if (equip_green_canvas):
+        window.blit(mini_green_canvas,  (103, 291))
+    if (equip_blue_canvas):
+        window.blit(mini_blue_canvas,  (103, 291))
+    if (equip_red_canvas):
+        window.blit(mini_red_canvas,  (103, 291))
 
+    fluoroscope_power = 0
+    if (equip_green_fluoroscope):
+        window.blit(mini_green_fluoroscope,  (91, 255))
+        fluoroscope_power = 5
+    if (equip_blue_fluoroscope):
+        window.blit(mini_blue_fluoroscope,  (91, 255))
+        fluoroscope_power = 15
+    if (equip_red_fluoroscope):
+        window.blit(mini_red_fluoroscope,  (91, 255))
+        fluoroscope_power = 30    
+    if (fluoroscope_power > 0):
+        user_fluoroscope_power_text = game_font.render("투시확률 : " + str(fluoroscope_power) + "%", True, (255, 255, 255))
+        window.blit(user_fluoroscope_power_text,(1, 1)) #user fluoroscope_power
+        
     die_button.draw(window)
     call_button.draw(window)
     quater_button.draw(window)
@@ -93,17 +151,16 @@ def display_refresh():
     if(combination_table == 1):
         window.blit(combination_table_image, (610,68)) # combination_table show
     pygame.display.update() # display refresh
-
 def before_start_display_refresh():
     # sutda_map_back ground draw
     window.blit(sutda_map_background, (0,0)) # background draw
     # refresh name and money info
-    user_name_text = game_font.render(user_name, True, (255, 255 ,255))
-    user_name_text_width = game_font.size(user_name)[0]
-    com_name_text = game_font.render(com_name, True, (255,255,255))
-    com_name_text_width = game_font.size(com_name)[0]
-    com_money_text = game_font.render(convert_money(com_money), True, (255, 255, 255))
-    user_money_text = game_font.render(convert_money(user_money), True, (255, 255, 255))
+    user_name_text = info_font.render(user_name, True, (255, 255 ,255))
+    user_name_text_width = info_font.size(user_name)[0]
+    com_name_text = info_font.render(com_name, True, (255,255,255))
+    com_name_text_width = info_font.size(com_name)[0]
+    com_money_text = info_font.render(convert_money(com_money), True, (241, 255, 126))
+    user_money_text = info_font.render(convert_money(user_money), True, (241, 255, 126))
     bet_money_text = game_font.render(convert_money(bet_money), True, (241, 255, 126))
     call_money_text = game_font.render(convert_money(call_money), True, (255, 255, 255))
     # user and computer name draw
@@ -115,8 +172,29 @@ def before_start_display_refresh():
     window.blit(bet_money_text,(550, 254)) #betting money
     window.blit(call_money_text,(550, 293)) #call money
     # character draw
-    #window.blit(character,(46,268))
-    #window.blit(apeach_image,(55,100))
+    window.blit(com_character_image,(78,112))
+    # item draw
+    if (equip_green_canvas):
+        window.blit(mini_green_canvas,  (103, 291))
+    if (equip_blue_canvas):
+        window.blit(mini_blue_canvas,  (103, 291))
+    if (equip_red_canvas):
+        window.blit(mini_red_canvas,  (103, 291))
+
+    fluoroscope_power = 0
+    if (equip_green_fluoroscope):
+        window.blit(mini_green_fluoroscope,  (91, 255))
+        fluoroscope_power = 5
+    if (equip_blue_fluoroscope):
+        window.blit(mini_blue_fluoroscope,  (91, 255))
+        fluoroscope_power = 15
+    if (equip_red_fluoroscope):
+        window.blit(mini_red_fluoroscope,  (91, 255))
+        fluoroscope_power = 30    
+    
+    if (fluoroscope_power > 0):
+        user_fluoroscope_power_text = game_font.render("투시확률 : " + str(fluoroscope_power) + "%", True, (255, 255, 255))
+        window.blit(user_fluoroscope_power_text,(1, 1)) #user fluoroscope_power
 
     # button draw    
     die_button.draw(window)
@@ -129,7 +207,6 @@ def before_start_display_refresh():
     if(combination_table == 1):
         window.blit(combination_table_image, (610,68)) # combination_table show
     pygame.display.update() # display refresh 
-
 def decide_user_self_betting(): # return 0 : die, return 1 : 콜, return 2 : 쿼터, return 3 : 하프
     global user_bet_value, first_bet, combination_table, entire_loop, sutda_map
     do_bet = True
@@ -165,7 +242,6 @@ def decide_user_self_betting(): # return 0 : die, return 1 : 콜, return 2 : 쿼
                     continue      
 
 if (__name__ == "__main__"): # main 함수임
-
   ################ display check #######################
     entire_loop = True
     start_menu = True
@@ -227,9 +303,24 @@ if (__name__ == "__main__"): # main 함수임
                         start_menu = False
                         pass
                     if (explain_button.in_locate(pos)): # explain button click down
-                        #explain_menu = True
-                        #start_menu = False
+                        explain_menu = True
+                        start_menu = False
                         pass
+
+        while(explain_menu):
+            window.blit(explain_background, (0,0)) # explain_background draw
+            backstage_button.draw(window)  
+            pygame.display.update() # display refresh
+
+            for event in pygame.event.get():
+                pos = pygame.mouse.get_pos()
+                if (event.type == pygame.QUIT): #quit event
+                    entire_loop = False
+                    explain_menu = False    
+                if (event.type == pygame.MOUSEBUTTONDOWN): # backstage_button click down
+                    if (backstage_button.in_locate(pos)):
+                        start_menu = True
+                        explain_menu = False
 
         while(mode_select_menu):
             window.blit(nick_background, (0,0)) # nick_background draw
@@ -248,14 +339,175 @@ if (__name__ == "__main__"): # main 함수임
                         start_menu = True
                         mode_select_menu = False
                     if (continue_start_button.in_locate(pos)):
+                        f = open("data.txt", "r")
+                        file_info = f.readlines()
+                        for i in range(0, len(file_info)):
+                            if (file_info[i] == "user_name\n"):
+                                user_name = str(file_info[i+1]).rstrip("\n")
+                            if (file_info[i] == "user_money\n"):
+                                user_money = int(file_info[i+1])
+                            if (file_info[i] == "saved_money\n"):
+                                save_money = int(file_info[i+1])
+                            if (file_info[i] == "green_fluoroscope_check\n"):
+                                if(file_info[i+1] == "True\n"):
+                                    green_fluoroscope_check = True
+                                else:
+                                    False
+                            if (file_info[i] == "blue_fluoroscope_check\n"):
+                                if(file_info[i+1] == "True\n"):
+                                    blue_fluoroscope_check = True
+                                else:
+                                    False
+                            if (file_info[i] == "red_fluoroscope_check\n"):
+                                if(file_info[i+1] == "True\n"):
+                                    red_fluoroscope_check = True
+                                else:
+                                    False
+                            if (file_info[i] == "green_canvas_check\n"):
+                                if(file_info[i+1] == "True\n"):
+                                    green_canvas_check = True
+                                else:
+                                    False
+                            if (file_info[i] == "blue_canvas_check\n"):
+                                if(file_info[i+1] == "True\n"):
+                                    blue_canvas_check = True
+                                else:
+                                    False
+                            if (file_info[i] == "red_canvas_check\n"):
+                                if(file_info[i+1] == "True\n"):
+                                    red_canvas_check = True
+                                else:
+                                    False
+                            if (file_info[i] == "equip_green_fluoroscope\n"):
+                                if(file_info[i+1] == "True\n"):
+                                    equip_green_fluoroscope = True
+                                else:
+                                    False
+                            if (file_info[i] == "equip_blue_fluoroscope\n"):
+                                if(file_info[i+1] == "True\n"):
+                                    equip_blue_fluoroscope = True
+                                else:
+                                    False
+                            if (file_info[i] == "equip_red_fluoroscope\n"):
+                                if(file_info[i+1] == "True\n"):
+                                    equip_red_fluoroscope = True
+                                else:
+                                    False
+                            if (file_info[i] == "equip_green_canvas\n"):
+                                if(file_info[i+1] == "True\n"):
+                                    equip_green_canvas = True
+                                else:
+                                    False
+                            if (file_info[i] == "equip_blue_canvas\n"):
+                                if(file_info[i+1] == "True\n"):
+                                    equip_blue_canvas = True
+                                else:
+                                    False
+                            if (file_info[i] == "equip_red_canvas\n"):
+                                if(file_info[i+1] == "True\n"):
+                                    equip_red_canvas = True
+                                else:
+                                    False
+
+                        f.close()
                         mode_select_menu = False
                         move_map = True
                     if (new_start_button.in_locate(pos)):
                         user_money = 1000000
                         save_money = 0
+                        #################### item check #######################
+                        item_list = []
+                        green_fluoroscope_check = False
+                        blue_fluoroscope_check = False
+                        red_fluoroscope_check = False
+                        green_canvas_check = False
+                        blue_canvas_check = False
+                        red_canvas_check = False
+                        equip_green_fluoroscope = False
+                        equip_blue_fluoroscope = False
+                        equip_red_fluoroscope = False
+                        equip_green_canvas = False
+                        equip_blue_canvas = False
+                        equip_red_canvas = False
+                        equip_fluoroscope_check = False
+                        equip_canvas_check = False
+                        fluoroscope_power_value = False
+
                         mode_select_menu = False
-                        move_map = True
-                        #nick_menu = True
+                        nick_menu = True
+       
+        while(nick_menu):
+            #input text
+            eng_chars = "abcdefghijklmnopqrstuvwxyz"
+            text_font = pygame.font.Font("D2Coding-Ver1.3.2-20180524-all.ttc", 32)
+            input_first_text = text_font.render("닉네임을 입력하세요.", True, (255,255,255))
+            input_text = ""
+            input_box = pygame.Rect(230, 70, 340, 52)
+            color_inactive = pygame.Color("lightskyblue3")
+            color_active = pygame.Color("orangered4")
+            color = color_inactive
+            active = False
+            done = False
+
+            changeKE = False
+            changeKE_cnt = 1
+            window.blit(nick_background, (0,0)) # nick_background draw
+            window.blit(input_first_text, (240, 80))
+            backstage_button.draw(window)
+            pygame.draw.rect(window, color, input_box, 2)
+            pygame.display.update() # display refresh
+            ######### nick name box click check#################
+            for event in pygame.event.get():
+                pos = pygame.mouse.get_pos()
+                if event.type == pygame.QUIT:
+                    nick_menu = False
+                    entire_loop = False
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if (backstage_button.in_locate(pos)):
+                        mode_select_menu = True
+                        nick_menu = False
+
+                    if (input_box.collidepoint(pos)):
+                        active = True
+                        done = True
+                        color = color_active
+                        input_text = ""
+                else:
+                    active = False
+                    color = color_inactive
+            ######### input nick name ##############################
+            while (done):
+                for event in pygame.event.get():
+                    pos = pygame.mouse.get_pos()
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        if (backstage_button.in_locate(pos)):
+                            mode_select_menu = True
+                            nick_menu = False
+                            done = False
+                    if event.type == pygame.QUIT:
+                        nick_menu = False
+                        entire_loop = False
+                        done = False
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_RETURN:
+                            if len(input_text) > 0:
+                                user_name = input_text
+                                input_text = ""
+                                done = False
+                                nick_menu = False
+                                move_map = True
+                        elif event.key == pygame.K_BACKSPACE:
+                            input_text = input_text[:-1]
+                        else:
+                            input_text += event.unicode
+
+                window.blit(nick_background, (0,0)) # nick_background draw
+                text_surface = text_font.render(input_text, True, (255,255,255))
+                window.blit(text_surface, (240, 80))
+                pygame.draw.rect(window, color, input_box, 2)
+                backstage_button.draw(window)
+                pygame.display.update() # display refres   
+        
         while(move_map):
             window.blit(move_map_background, (0,-150)) # move_map_background draw
             backstage_button.draw(window)
@@ -268,6 +520,8 @@ if (__name__ == "__main__"): # main 함수임
             safe_box.draw(window)
             window.blit(character, (character_x_pos, character_y_pos))
             ############### item draw #####################
+            fluoroscope_power = 0
+            character_speed = 0.05
             if (equip_green_fluoroscope):
                 green_fluoroscope.item_draw(window,  character_x_pos + 1, character_y_pos + 8)
                 fluoroscope_power = 5
@@ -279,13 +533,13 @@ if (__name__ == "__main__"): # main 함수임
                 fluoroscope_power = 30    
             if (equip_green_canvas):
                 green_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
-                character_speed = 0.15
+                character_speed = 0.10
             if (equip_blue_canvas):
                 blue_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
-                character_speed = 0.25
+                character_speed = 0.20
             if (equip_red_canvas):
                 red_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
-                character_speed = 0.35
+                character_speed = 0.30
             ##################### coin ##########################
             if (coin_y_pos >= window_height):
                 rand_coin = random.randint(0,100)
@@ -395,6 +649,29 @@ if (__name__ == "__main__"): # main 함수임
                         safe_box_map = True
                         move_map = False
 
+                    if (save_info_button.in_locate(pos)): #저장하기버튼 클릭
+                        save_info_button.check_button_draw(window, "저장하시겠습니까?")
+                        pygame.display.update() # display refresh
+                        click_check = True
+                        while (click_check):
+                            for event in pygame.event.get():
+                                pos = pygame.mouse.get_pos()
+                                if (event.type == pygame.MOUSEBUTTONDOWN):
+                                    if (save_info_button.yes_button_in_locate(pos)):
+                                        alert_save_completed.draw(window)
+                                        pygame.display.update() # display refresh
+                                        ok_check = True
+                                        while(ok_check):
+                                            for event in pygame.event.get():
+                                                ok_pos = pygame.mouse.get_pos()
+                                                if (event.type == pygame.MOUSEBUTTONDOWN):
+                                                    if (pos_check(ok_pos, 350, 259, 450, 299)):
+                                                        save_user_info()
+                                                        ok_check = False
+                                                        click_check = False
+                                    if (save_info_button.no_button_in_locate(pos)):
+                                        click_check = False
+
 
             character_x_pos = character_x_pos + (move_x * fps)
             character_y_pos = character_y_pos + (move_y * fps)
@@ -436,19 +713,19 @@ if (__name__ == "__main__"): # main 함수임
             # collide check
             if (character_rect.colliderect(coin_rect)):
                 if (rand_coin < 50):
-                    coin_money = int(user_money * 0.001)
+                    coin_money = int(user_money * 0.0001)
                     if(user_money <= 1000000):
                         coin_money = 1000
                 elif (rand_coin < 80):
-                    coin_money = int(user_money * 0.005)
+                    coin_money = int(user_money * 0.0005)
                     if(user_money <= 1000000):
                         coin_money = 5000
                 elif (rand_coin < 95):
-                    coin_money = int(user_money * 0.01)
+                    coin_money = int(user_money * 0.001)
                     if(user_money <= 1000000):
                         coin_money = 10000                
                 else:
-                    coin_money = int(user_money * 0.1)
+                    coin_money = int(user_money * 0.005)
                     if(user_money <= 1000000):
                         coin_money = 100000                   
 
@@ -666,6 +943,7 @@ if (__name__ == "__main__"): # main 함수임
             next_button.draw(window)
             user_money_text = game_font.render("보유금액 : " + convert_money(user_money), True, (0, 0, 255))
             window.blit(user_money_text,(1, 1))   # user_money
+            starting = True
 
             if(user_money < 10000000):
                 window.blit(level_2_lock, (305, 170))
@@ -701,6 +979,7 @@ if (__name__ == "__main__"): # main 함수임
                         com_name = "신난 어피치"
                         com_money = 1000000
                         pan_money = 10000
+                        com_character_image = pygame.image.load("image\LV1.png")
                         sutda_map = True
                         level_select_map = False
 
@@ -708,6 +987,7 @@ if (__name__ == "__main__"): # main 함수임
                         com_name = "소심한 네오"
                         com_money = 10000000
                         pan_money = 100000
+                        com_character_image = pygame.image.load("image\LV2.png")
                         sutda_map = True
                         level_select_map = False
 
@@ -715,6 +995,7 @@ if (__name__ == "__main__"): # main 함수임
                         com_name = "멋쩍은 튜브"
                         com_money = 50000000
                         pan_money = 500000
+                        com_character_image = pygame.image.load("image\LV3.png")
                         sutda_map = True
                         level_select_map = False
 
@@ -722,6 +1003,7 @@ if (__name__ == "__main__"): # main 함수임
                         com_name = "부탁하는 무지"
                         com_money = 100000000
                         pan_money = 1000000
+                        com_character_image = pygame.image.load("image\LV4.png")
                         sutda_map = True
                         level_select_map = False
 
@@ -729,6 +1011,7 @@ if (__name__ == "__main__"): # main 함수임
                         com_name = "멋쟁이 프로도"
                         com_money = 1000000000
                         pan_money = 10000000
+                        com_character_image = pygame.image.load("image\LV5.png")
                         sutda_map = True
                         level_select_map = False
 
@@ -736,8 +1019,9 @@ if (__name__ == "__main__"): # main 함수임
                         com_name = "힙합맨 제이지"
                         com_money = 10000000000
                         pan_money = 100000000
+                        com_character_image = pygame.image.load("image\LV6.png")
                         sutda_map = True
-                        level_select_map2 = False
+                        level_select_map = False
 
                     if (backstage_button.in_locate(pos)): # backstage_button click down
                         level_select_map = False
@@ -758,6 +1042,7 @@ if (__name__ == "__main__"): # main 함수임
             back_button.draw(window)
             user_money_text = game_font.render("보유금액 : " + convert_money(user_money), True, (0, 0, 255))
             window.blit(user_money_text,(1, 1))   # user_money
+            starting = True
             if(user_money < 100000000000):
                 window.blit(level_7_lock, (305, 90))
                 window.blit(level_8_lock, (305, 170))
@@ -799,6 +1084,7 @@ if (__name__ == "__main__"): # main 함수임
                         com_name = "으쓱으쓱 어피치"
                         com_money = 100000000000
                         pan_money = 500000000
+                        com_character_image = pygame.image.load("image\LV7.png")
                         sutda_map = True
                         level_select_map2 = False
 
@@ -806,6 +1092,7 @@ if (__name__ == "__main__"): # main 함수임
                         com_name = "불나게 일하는 네오"
                         com_money = 500000000000
                         pan_money = 1000000000
+                        com_character_image = pygame.image.load("image\LV8.png")
                         sutda_map = True
                         level_select_map2 = False
 
@@ -813,6 +1100,7 @@ if (__name__ == "__main__"): # main 함수임
                         com_name = "불 뿜는 튜브"
                         com_money = 1000000000000
                         pan_money = 10000000000
+                        com_character_image = pygame.image.load("image\LV9.png")
                         sutda_map = True
                         level_select_map2 = False
 
@@ -820,6 +1108,7 @@ if (__name__ == "__main__"): # main 함수임
                         com_name = "파이팅하는 무지"
                         com_money = 100000000000000
                         pan_money = 1000000000000
+                        com_character_image = pygame.image.load("image\LV10.png")
                         sutda_map = True
                         level_select_map2 = False
 
@@ -827,13 +1116,15 @@ if (__name__ == "__main__"): # main 함수임
                         com_name = "피스메이커 프로도"
                         com_money = 100000000000000
                         pan_money = 5000000000000
+                        com_character_image = pygame.image.load("image\LV11.png")
                         sutda_map = True
                         level_select_map2 = False
 
-                    if (level_11.in_locate(pos) and user_money >= 100000000000000): # level_12 click down
+                    if (level_12.in_locate(pos) and user_money >= 100000000000000): # level_12 click down
                         com_name = "건방진 제이지"
                         com_money = 100000000000000
                         pan_money = 10000000000000
+                        com_character_image = pygame.image.load("image\LV12.png")
                         sutda_map = True
                         level_select_map2 = False
 
@@ -866,7 +1157,6 @@ if (__name__ == "__main__"): # main 함수임
                 lose_map = True
                 break
             # wait start button or backstage button
-            starting = True
             while (starting):
                 for event in pygame.event.get():
                     pos = pygame.mouse.get_pos()
@@ -879,7 +1169,7 @@ if (__name__ == "__main__"): # main 함수임
                             starting = False
                         if (backstage_button.in_locate(pos)): # backstage_button click down
                             starting = False
-                            move_map = True
+                            level_select_map = True
                             sutda_map = False
                         if (족보_button.in_locate(pos) and combination_table == 0):
                             combination_table = 1
@@ -1018,7 +1308,7 @@ if (__name__ == "__main__"): # main 함수임
                     user_money = user_money + bet_money
                     turn = 0
                 if (result == 1):
-                    result_text = game_font.render("*********" + com_name + " Win! **********", True, (255,255,255))
+                    result_text = game_font.render("********* " + com_name + " Win! **********", True, (255,255,255))
                     com_money = com_money + bet_money
                     turn = 1
                 if (result == 2):
@@ -1044,7 +1334,7 @@ if (__name__ == "__main__"): # main 함수임
                 call_money = 0
                 
             if (user_die == 1): #user die
-                result_text = game_font.render("*********" + com_name + " Win! **********", True, (255,255,255))
+                result_text = game_font.render("********* " + com_name + " Win! **********", True, (255,255,255))
                 window.blit(result_text,(30, 40))
                 turn = 1
                 user_die = 0 #user_die 초기화
@@ -1054,7 +1344,29 @@ if (__name__ == "__main__"): # main 함수임
 
                 
             pygame.display.update() # display refresh
-            pygame.time.delay(1000)
+            starting = True
+            while(starting):
+                for event in pygame.event.get():
+                    pos = pygame.mouse.get_pos()
+                    if event.type == pygame.QUIT: #quit event
+                        starting = False
+                        entire_loop = False
+                        sutda_map = False
+                    if (event.type == pygame.MOUSEBUTTONDOWN):
+                        if (game_start_button.in_locate(pos)): # game_start_button click down
+                            starting = False
+                        if (backstage_button.in_locate(pos)): # backstage_button click down
+                            starting = False
+                            level_select_map = True
+                            sutda_map = False
+                        if (족보_button.in_locate(pos) and combination_table == 0):
+                            combination_table = 1
+                            before_start_display_refresh()
+                            continue
+                        if (족보_button.in_locate(pos) and combination_table == 1):
+                            combination_table = 0
+                            before_start_display_refresh()
+                            continue
     
         while(purchase_map):
             purchase_map_ch_pos = [453,37] 
@@ -1169,7 +1481,6 @@ if (__name__ == "__main__"): # main 함수임
                         purchase_map = False
 
         while(safe_box_map):
-
             window.blit(safe_box_background, (0,0)) # safe_box_background draw
             save_button.draw(window)
             find_button.draw(window)
@@ -1251,20 +1562,18 @@ if (__name__ == "__main__"): # main 함수임
             backstage_button.draw(window) 
             window.blit(character, (character_x_pos, character_y_pos))
             ############### item draw #####################
-            if (green_fluoroscope_check):
-                green_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
-            if (blue_fluoroscope_check):
-                blue_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
-            if (red_fluoroscope_check):
-                red_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
-
-            if (green_canvas_check):
-                green_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
-            if (blue_canvas_check):
-                blue_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
-            if (red_canvas_check):
-                red_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
-                character_speed = 0.3
+            if (equip_green_fluoroscope):
+                green_fluoroscope.item_draw(window,  character_x_pos + 1, character_y_pos + 8)
+            if (equip_blue_fluoroscope):
+                blue_fluoroscope.item_draw(window,  character_x_pos + 1, character_y_pos + 8)
+            if (equip_red_fluoroscope):
+                red_fluoroscope.item_draw(window,  character_x_pos + 1, character_y_pos + 8)
+            if (equip_green_canvas):
+                green_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
+            if (equip_blue_canvas):
+                blue_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
+            if (equip_red_canvas):
+                red_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
             ###############################################
             pygame.display.update() # display refresh
 
@@ -1354,22 +1663,18 @@ if (__name__ == "__main__"): # main 함수임
             backstage_button.draw(window) 
             window.blit(character, (character_x_pos, character_y_pos))
             ############### item draw #####################
-            if (green_fluoroscope_check):
-                green_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
-            if (blue_fluoroscope_check):
-                blue_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
-            if (red_fluoroscope_check):
-                red_fluoroscope.item_draw(window,  character_x_pos + 9, character_y_pos + 20)
-
-            if (green_canvas_check):
-                green_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
-            if (blue_canvas_check):
-                blue_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
-            if (red_canvas_check):
-                red_canvas.item_draw(window,  character_x_pos + 37, character_y_pos + 81)
-                character_speed = 0.3
-
-
+            if (equip_green_fluoroscope):
+                green_fluoroscope.item_draw(window,  character_x_pos + 1, character_y_pos + 8)
+            if (equip_blue_fluoroscope):
+                blue_fluoroscope.item_draw(window,  character_x_pos + 1, character_y_pos + 8)
+            if (equip_red_fluoroscope):
+                red_fluoroscope.item_draw(window,  character_x_pos + 1, character_y_pos + 8)
+            if (equip_green_canvas):
+                green_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
+            if (equip_blue_canvas):
+                blue_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
+            if (equip_red_canvas):
+                red_canvas.item_draw(window,  character_x_pos + 29, character_y_pos + 81)
             ###############################################
             pygame.display.update() # display refresh
             for event in pygame.event.get():

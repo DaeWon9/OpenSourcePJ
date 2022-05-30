@@ -268,6 +268,7 @@ alert_lack_of_money = Alert_Msg("보유금액이 부족합니다.")
 alert_lack_of_find_money = Alert_Msg("보관금액이 부족합니다.")
 #backbround image
 main_background = pygame.image.load("image\Main_background.jpg") 
+explain_background = pygame.image.load("image\Explain_background.jpg")
 nick_background = pygame.image.load("image\닉_background.jpg")
 move_map_background = pygame.image.load("image\Move_Main_background.jpg")
 sutda_map_background = pygame.image.load("image\Sutda_Map_Background.jpg")
@@ -279,16 +280,6 @@ equip = pygame.image.load("image\Equip.png")
 purchase_map_background = pygame.image.load("image\ItempShop_background.png")
 safe_box_background = pygame.image.load("image\Safe_box_background.jpg")
 level_select_background = pygame.image.load("image\Level_select_background.jpg")
-
-
-
-# computer character image
-apeach_image = pygame.image.load("image\\Apeach.png")
-muzi_image = pygame.image.load("image\\Muzi.png")
-tube_image = pygame.image.load("image\\Tube.png")
-neo_image = pygame.image.load("image\\Neo.png")
-jayg_image = pygame.image.load("image\\JayG.png")
-frodo_image = pygame.image.load("image\\Frodo.png")
 
 #button
 start_button = Button(492, 310, "image\Start.png")
@@ -350,6 +341,14 @@ coin_4 = pygame.image.load("image\Coin4.png")
 first_turn = pygame.image.load("image\선1.png")
 combination_table_image = pygame.image.load("image\Combination_table.png")
 sold_out = pygame.image.load("image\Sold_out.png")
+
+mini_green_canvas = pygame.image.load("image\신발_초록_s.png")
+mini_blue_canvas = pygame.image.load("image\신발_파랑_s.png")
+mini_red_canvas = pygame.image.load("image\신발_빨강_s.png")
+mini_green_fluoroscope = pygame.image.load("image\투시경_초록_s.png")
+mini_blue_fluoroscope = pygame.image.load("image\투시경_파랑_s.png")
+mini_red_fluoroscope = pygame.image.load("image\투시경_빨강_s.png")
+
 
 green_canvas_info = pygame.image.load("image\Green_canvas_info.png")
 blue_canvas_info = pygame.image.load("image\Blue_canvas_info.png")

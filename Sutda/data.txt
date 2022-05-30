@@ -1,0 +1,33 @@
+###################유저 정보###################
+user_name
+테스트유저
+user_money
+163901654
+saved_money
+10214878192500000000
+###################아이템 보유현황###################
+green_fluoroscope_check
+False
+blue_fluoroscope_check
+True
+red_fluoroscope_check
+False
+green_canvas_check
+False
+blue_canvas_check
+False
+red_canvas_check
+True
+###################아이템 장착여부###################
+equip_green_fluoroscope
+False
+equip_blue_fluoroscope
+False
+equip_red_fluoroscope
+False
+equip_green_canvas
+False
+equip_blue_canvas
+False
+equip_red_canvas
+True

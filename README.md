@@ -21,6 +21,13 @@
 </div>
 
 <div align="center">
+  <h>Main<h>
+  <p>
+    <img width="400" alt="image" src="https://user-images.githubusercontent.com/101173462/208041610-d9e6ba2a-c66c-40eb-be9b-1c5a9e6dd9e2.png">
+  </p>
+</div>
+
+<div align="center">
   <h>Level Select<h>
   <p align="center">
     <img width="400" alt="image" src="https://user-images.githubusercontent.com/101173462/208038131-aac63452-cba9-40c2-a3f8-69b19189825d.png">
